@@ -38,15 +38,22 @@
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
-                Quản lý thông báo
+                Danh mục
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
+            	<li>
+                    <a href='<c:url value="/admin-announcement?type=list&page=1&maxPageItem=2&sortName=title&sortBy=asc"/>'>
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Quản lý câu lạc bộ
+                    </a>
+                    <b class="arrow"></b>
+                </li>
                 <li>
                     <a href='<c:url value="/admin-announcement?type=list&page=1&maxPageItem=2&sortName=title&sortBy=asc"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
-                        DS thông báo
+                        Quản lý thông báo
                     </a>
                     <b class="arrow"></b>
                 </li>

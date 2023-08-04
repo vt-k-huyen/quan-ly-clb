@@ -9,6 +9,13 @@ public class MessageModel extends AbstractModel<MessageModel>{
 	private String memberID;
 	private Timestamp sendTime;
 	private Timestamp receiveTime;
+	private String memberSend;
+	public String getMemberSend() {
+		return memberSend;
+	}
+	public void setMemberSend(String memberSend) {
+		this.memberSend = memberSend;
+	}
 	public Long getMessageID() {
 		return messageID;
 	}
@@ -44,6 +51,21 @@ public class MessageModel extends AbstractModel<MessageModel>{
 	}
 	public void setReceiveTime(Timestamp receiveTime) {
 		this.receiveTime = receiveTime;
+	}
+	public MessageModel(Long messageID, String title, String content, String memberID, Timestamp sendTime,
+			Timestamp receiveTime, String memberSend) {
+		super();
+		this.messageID = messageID;
+		this.title = title;
+		this.content = content;
+		this.memberID = memberID;
+		this.sendTime = sendTime;
+		this.receiveTime = receiveTime;
+		this.memberSend = memberSend;
+	}
+	public MessageModel() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 }

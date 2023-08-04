@@ -67,5 +67,22 @@ public class UserModel extends AbstractModel<UserModel>{
 	public void setRole(RoleModel role) {
 		this.role = role;
 	}
+	public UserModel(String userID, String userName, String email, String password, String roleID, RoleModel role,
+			Integer status, Timestamp createDate, Timestamp modifyDate) {
+		super();
+		this.userID = userID;
+		this.userName = userName;
+		this.email = email;
+		this.password = password;
+		this.roleID = roleID;
+		this.role = role;
+		this.status = status;
+		this.createDate = createDate;
+		this.modifyDate = modifyDate;
+	}
+	public UserModel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 }

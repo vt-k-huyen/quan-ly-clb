@@ -15,5 +15,14 @@ public class MemberEventModel extends AbstractModel<MemberEventModel>{
 	public void setMemberID(String memberID) {
 		this.memberID = memberID;
 	}
+	public MemberEventModel(String eventID, String memberID) {
+		super();
+		this.eventID = eventID;
+		this.memberID = memberID;
+	}
+	public MemberEventModel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 }

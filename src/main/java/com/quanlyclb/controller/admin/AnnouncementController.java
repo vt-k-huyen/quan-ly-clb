@@ -1,6 +1,8 @@
  package com.quanlyclb.controller.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -10,14 +12,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jboss.weld.security.GetContextClassLoaderAction;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quanlyclb.constant.SystemConstant;
 import com.quanlyclb.model.AnnouncementModel;
+import com.quanlyclb.model.UserModel;
 import com.quanlyclb.paging.PageRequest;
 import com.quanlyclb.paging.Pageble;
 import com.quanlyclb.service.IAnnouncementService;
 import com.quanlyclb.service.IClubService;
 import com.quanlyclb.sort.Sorter;
 import com.quanlyclb.utils.FormUltil;
+import com.quanlyclb.utils.SessionUtil;
 
 @WebServlet(urlPatterns = {"/admin-announcement"})
 public class AnnouncementController extends HttpServlet{
@@ -51,6 +58,28 @@ public class AnnouncementController extends HttpServlet{
 		rd.forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("UTF-8");
+		System.out.print(123);
+		String id = request.getParameter("announcementID");
+		String clubId = request.getParameter("clubID");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String note = request.getParameter("note");
+		String btnSave = request.getParameter("btnAddOrUpdateTB");  
+		if(id != null && btnSave.equals("Cập nhật thông báo")) {
+			AnnouncementModel model = new AnnouncementModel(Long.parseLong(id), title, content, clubId, null, null,
+					note);
+			List<AnnouncementModel> list = announcementService.findAll();
+			request.setAttribute("listTB", list);
+			response.getWriter().print(model.toString());
+			System.out.print(model.toString());
+			model = announcementService.save(model);
+			request.setAttribute("listTB", list);
+			request.setAttribute(SystemConstant.MODEL, model);
+			response.sendRedirect(request.getContextPath() + "/admin-announcement");
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("/views/admin/announcement/edit.jsp");
+		rd.forward(request, response);
 	}
 }

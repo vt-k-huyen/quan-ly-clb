@@ -52,5 +52,20 @@ public class RequestModel extends  AbstractModel<RequestModel>{
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	public RequestModel(Long requestID, String clubID, String memberID, Timestamp requestTime, Timestamp acceptTime,
+			Timestamp finishTime, int status) {
+		super();
+		this.requestID = requestID;
+		this.clubID = clubID;
+		this.memberID = memberID;
+		this.requestTime = requestTime;
+		this.acceptTime = acceptTime;
+		this.finishTime = finishTime;
+		this.status = status;
+	}
+	public RequestModel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 }

@@ -6,7 +6,6 @@ public class AnnouncementModel extends AbstractModel<AnnouncementModel>{
 	private Long announcementID;
 	private String title;
 	private String content;
-	private String photo;
 	private String clubID;
 	private Timestamp createDate;
 	private String createBy;
@@ -28,12 +27,6 @@ public class AnnouncementModel extends AbstractModel<AnnouncementModel>{
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public String getPhoto() {
-		return photo;
-	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
 	}
 	public String getClubID() {
 		return clubID;
@@ -58,6 +51,21 @@ public class AnnouncementModel extends AbstractModel<AnnouncementModel>{
 	}
 	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
+	}
+	public AnnouncementModel(Long announcementID, String title, String content, String clubID, Timestamp createDate,
+			String createBy, String note) {
+		super();
+		this.announcementID = announcementID;
+		this.title = title;
+		this.content = content;
+		this.clubID = clubID;
+		this.createDate = createDate;
+		this.createBy = createBy;
+		this.note = note;
+	}
+	public AnnouncementModel() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 }

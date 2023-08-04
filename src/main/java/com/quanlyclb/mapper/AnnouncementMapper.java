@@ -14,7 +14,6 @@ public class AnnouncementMapper implements RowMapper<AnnouncementModel>{
 			a.setAnnouncementID(rs.getLong("announcement_id"));
 			a.setTitle(rs.getString("title"));
 			a.setContent(rs.getString("content"));
-			a.setPhoto(rs.getString("photo"));
 			a.setClubID(rs.getString("club_id"));
 			a.setCreateDate(rs.getTimestamp("create_date"));
 			a.setCreateBy(rs.getString("create_by"));

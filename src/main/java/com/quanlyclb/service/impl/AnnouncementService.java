@@ -74,4 +74,9 @@ public class AnnouncementService implements IAnnouncementService{
 		return announcementModel;
 	}
 
+	@Override
+	public List<AnnouncementModel> findAll() {
+		return announcementDao.findAll();
+	}
+
 }

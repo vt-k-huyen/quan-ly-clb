@@ -38,4 +38,18 @@ public class ClubModel extends AbstractModel<ClubModel>{
 	public void setDissolutionDate(Timestamp dissolutionDate) {
 		this.dissolutionDate = dissolutionDate;
 	}
+	public ClubModel(String clubID, String clubName, String description, Timestamp createDate,
+			Timestamp dissolutionDate) {
+		super();
+		this.clubID = clubID;
+		this.clubName = clubName;
+		this.description = description;
+		this.createDate = createDate;
+		this.dissolutionDate = dissolutionDate;
+	}
+	public ClubModel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 }

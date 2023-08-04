@@ -13,4 +13,5 @@ public interface IAnnouncementService {
 	void delete(long[] announcementID);
 	List<AnnouncementModel> findByClubId(String clubID);
 	int getTotalItem();	
+	List<AnnouncementModel> findAll();
 }

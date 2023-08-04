@@ -30,18 +30,18 @@ public class AnnouncementDao extends AbstractDao<AnnouncementModel> implements I
 
 	@Override
 	public Long save(AnnouncementModel announcementModel) {
-		StringBuilder sql = new StringBuilder("INSERT INTO announcements(title, content, photo, club_id, create_date, notes, create_by)");
-		sql.append(" VALUES(?,?,?,?,?,?,?)");
-		return insert(sql.toString(), announcementModel.getTitle(), announcementModel.getContent(), announcementModel.getPhoto(), announcementModel.getClubID(),
+		StringBuilder sql = new StringBuilder("INSERT INTO announcements(title, content, club_id, create_date, notes, create_by)");
+		sql.append(" VALUES(?,?,?,?,?,?)");
+		return insert(sql.toString(), announcementModel.getTitle(), announcementModel.getContent(), announcementModel.getClubID(),
 				announcementModel.getCreateDate(),announcementModel.getNote(), announcementModel.getCreateBy());
 	}
 
 	@Override
 	public void update(AnnouncementModel updateAnnouncement) {
-		StringBuilder sql = new StringBuilder("UPDATE announcements SET title = ?, content = ?, photo = ?, club_id = ?, create_date = ?, notes = ?");
+		StringBuilder sql = new StringBuilder("UPDATE announcements SET title = ?, content = ?, club_id = ?, create_date = ?, notes = ?");
 		sql.append(" WHERE announcement_id = ?");
-		update(sql.toString(), updateAnnouncement.getTitle(), updateAnnouncement.getContent(), updateAnnouncement.getPhoto(),
-				updateAnnouncement.getCreateDate(), updateAnnouncement.getNote(),updateAnnouncement.getClubID());
+		update(sql.toString(), updateAnnouncement.getTitle(), updateAnnouncement.getContent(),updateAnnouncement.getClubID(), 
+				updateAnnouncement.getCreateDate(), updateAnnouncement.getNote(), updateAnnouncement.getAnnouncementID());
 	}
 
 	@Override
@@ -60,6 +60,12 @@ public class AnnouncementDao extends AbstractDao<AnnouncementModel> implements I
 	public int getTotalItem() {
 		String sql  = "SELECT count(*) FROM announcements";
 		return count(sql);
+	}
+
+	@Override
+	public List<AnnouncementModel> findAll() {
+		String sql = "SELECT * FROM announcements";
+		return query(sql, new AnnouncementMapper());
 	}
 
 }

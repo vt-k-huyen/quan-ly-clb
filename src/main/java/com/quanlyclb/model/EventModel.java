@@ -7,7 +7,7 @@ public class EventModel extends AbstractModel<EventModel>{
 	private String eventName;
 	private Timestamp fromDate;
 	private Timestamp toDate;
-	private String place;
+	private String detail;
 	private String clubID;
 	private String notes;
 	public Long getEventID() {
@@ -34,11 +34,11 @@ public class EventModel extends AbstractModel<EventModel>{
 	public void setToDate(Timestamp toDate) {
 		this.toDate = toDate;
 	}
-	public String getPlace() {
-		return place;
+	public String getDetail() {
+		return detail;
 	}
-	public void setPlace(String place) {
-		this.place = place;
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 	public String getClubID() {
 		return clubID;
@@ -51,6 +51,21 @@ public class EventModel extends AbstractModel<EventModel>{
 	}
 	public void setNotes(String notes) {
 		this.notes = notes;
+	}
+	public EventModel(Long eventID, String eventName, Timestamp fromDate, Timestamp toDate, String detail,
+			String clubID, String notes) {
+		super();
+		this.eventID = eventID;
+		this.eventName = eventName;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.detail = detail;
+		this.clubID = clubID;
+		this.notes = notes;
+	}
+	public EventModel() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 }

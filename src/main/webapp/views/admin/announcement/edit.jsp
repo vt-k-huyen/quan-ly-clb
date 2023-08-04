@@ -5,6 +5,7 @@
 <html>
 <head>
 <title>Chỉnh sửa thông báo</title>
+<meta http-equiv="Content-Security-Policy" content="default-src https://cdn.example.net; child-src 'none'; object-src 'none'">
 </head>
 <body>
 	<div class="main-content">
@@ -26,6 +27,7 @@
 						<c:if test="${not empty message}">
 							<div class="alert alert-${alert}">${message}</div>
 						</c:if> 
+						<!-- <form id="formSubmit"> -->
 						<form id="formSubmit">
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right">Câu
@@ -64,18 +66,9 @@
 							</div>
 							<br /> <br />
 							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right">Hình
-									ảnh</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" id="photo" name="photo"
-										value="" />
-								</div>
-							</div>
-							<br /> <br />
-							<div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right">Nội dung</label>
                                 <div class="col-sm-9">                                 
-                                    <textarea rows="" cols="" id="content" name="content" style="width: 820px;height: 175px">${model.content}</textarea>
+                                    <textarea form="formSubmit" rows="" cols="" id="content" name="content" style="width: 820px;height: 175px">${model.content}</textarea>
                                 </div>
                             </div>
 							<br /> <br />
@@ -92,19 +85,16 @@
 								<div class="col-sm-12">
 									<c:if test="${not empty model.announcementID }">
 										<input type="button"
-											class="btn btn-white btn-warning btn-bold"
-											value="Cập nhật thông báo" id="btnAddOrUpdateTB" />
+											class="btn btn-primary"
+											value="Cập nhật thông báo" name="btnAddOrUpdateTB" id="btnAddOrUpdateTB" />
 									<!-- 	<button type="submit" class="btn btn-primary" value="Cập nhật thông báo" id="btnAddOrUpdateTB">
 									<i class="fa fa-save"></i> Cập nhật thông báo
 								</button>	 -->
 									</c:if>
 									<c:if test="${empty model.announcementID }">
 										<input type="button"
-											class="btn btn-white btn-warning btn-bold"
-											value="Thêm thông báo" id="btnAddOrUpdateTB" />
-										<!-- <button type="submit" class="btn btn-primary" value="Thêm thông báo" id="btnAddOrUpdateTB">
-									<i class="fa fa-save"></i> Thêm thông báo
-								</button>	 -->
+											class="btn btn-primary"
+											value="Thêm thông báo" name="btnAddOrUpdateTB" id="btnAddOrUpdateTB" />
 									</c:if>
 									
 								</div>
@@ -118,45 +108,47 @@
 	</div>
 	<script>
 		$('#btnAddOrUpdateTB').click(function(e) {
-			e.preventDefault();
+			e.preventDefault(); 
 			var data = {};
 			var formData = $('#formSubmit').serializeArray();
 			$.each(formData, function (i, v) {
 	            data[""+v.name+""] = v.value;
 	        });
 			var id = $('#announcementID').val();
+			var idtype = typeof(id);
 			if(id == ""){
 				addAnnouncement(data);
-			} else{
+				
+			}else{
 				updateAnnouncement(data);
 			}
 		});
-		function addAnnouncement(data){
-			$.ajax({
-				url: '${apiURL}',
-				type: 'POST', 
-				contentType: 'application/json',
-				data: JSON.stringify(data || null),
-				dataType: 'json',
-				success: function(result){
+	 	function addAnnouncement(data){
+	 		$.ajax({
+				url : '${apiURL}',
+				type : 'POST',
+				contentType : 'application/json',
+				data : JSON.stringify(data || null),
+				dataType : 'json',
+				success : function(result) {
 					console.log(result);
 				},
-				error: function(error){
+				error : function(error) {
 					console.log(error);
 				}
 			});
-		}
-		function updateAnnouncement(data){
+			} 
+		function updateAnnouncement(data) {
 			$.ajax({
-				url: '${apiURL}',
-				type: 'PUT', 
-				contentType: 'application/json',
-				data: JSON.stringify(data || null),
-				dataType: 'json',
-				success: function(result){
+				url : '${apiURL}',
+				type : 'PUT',
+				contentType : 'application/json',
+				data : JSON.stringify(data || null),
+				dataType : 'json',
+				success : function(result) {
 					console.log(result);
 				},
-				error: function(error){
+				error : function(error) {
 					console.log(error);
 				}
 			});

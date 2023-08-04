@@ -7,6 +7,7 @@ import com.quanlyclb.paging.Pageble;
 
 public interface IAnnouncementDao extends GenericDao<AnnouncementModel> {
 	List<AnnouncementModel> findAll(Pageble pageble);
+	List<AnnouncementModel> findAll();
 	AnnouncementModel findOne(Long announcementID);
 	Long save(AnnouncementModel announcementModel);
 	void update(AnnouncementModel updateAnnouncement);
