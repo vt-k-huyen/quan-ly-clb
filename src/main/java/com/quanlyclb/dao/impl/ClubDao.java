@@ -44,7 +44,7 @@ public class ClubDao extends AbstractDao<ClubModel> implements IClubDao{
 	@Override
 	public void update(ClubModel updateClub) {
 		StringBuilder sql = new StringBuilder("UPDATE clubs SET club_name = ?, description = ?, create_date = ?, dissolution_date = ?");
-		sql.append(" WHERE club_id = ?");
+		sql.append(" WHERE club_id LIKE ?");
 		update(sql.toString(), updateClub.getClubName(), updateClub.getDescription(), updateClub.getCreateDate(), updateClub.getDissolutionDate(), updateClub.getClubID());
 	}
 

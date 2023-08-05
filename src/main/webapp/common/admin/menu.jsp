@@ -44,7 +44,7 @@
             <b class="arrow"></b>
             <ul class="submenu">
             	<li>
-                    <a href='<c:url value="/admin-announcement?type=list&page=1&maxPageItem=2&sortName=title&sortBy=asc"/>'>
+                    <a href='<c:url value="/admin-club?type=list&page=1&maxPageItem=2&sortName=club_name&sortBy=asc"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
                         Quản lý câu lạc bộ
                     </a>

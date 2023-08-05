@@ -131,10 +131,10 @@
 				data : JSON.stringify(data || null),
 				dataType : 'json',
 				success : function(result) {
-					console.log(result);
+					window.location.href = "${AnnouncementURL}?type=edit&announcementID="+result.announcementID+"&message=insert_success";
 				},
 				error : function(error) {
-					console.log(error);
+					window.location.href = "${AnnouncementURL}?type=list&maxPageItem=2&page=1&message=error_system";
 				}
 			});
 			} 
@@ -146,10 +146,10 @@
 				data : JSON.stringify(data || null),
 				dataType : 'json',
 				success : function(result) {
-					console.log(result);
+					window.location.href = "${AnnouncementURL}?type=edit&announcementID="+result.announcementID+"&message=update_success";
 				},
 				error : function(error) {
-					console.log(error);
+					window.location.href = "${AnnouncementURL}?type=list&maxPageItem=2&page=1&message=error_system";
 				}
 			});
 		}
