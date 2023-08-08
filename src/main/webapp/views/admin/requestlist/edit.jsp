@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp"%>
-<c:url var="apiURL" value="/api-admin-announcement"/>
-<c:url var ="AnnouncementURL" value="/admin-announcement"/>
+<c:url var="apiURL" value="/api-admin-requestlist"/>
+<c:url var ="RequestListURL" value="/admin-requestlist"/>
 <html>
 <head>
-<title>Chỉnh sửa thông báo</title>
+<title>Xử lý yêu cầu</title>
 <meta http-equiv="Content-Security-Policy" content="default-src https://cdn.example.net; child-src 'none'; object-src 'none'">
 </head>
 <body>
@@ -17,7 +17,7 @@
 				<ul class="breadcrumb">
 					<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">Trang
 							chủ</a></li>
-					<li class="active">Chỉnh sửa thông báo</li>
+					<li class="active">Xử lý yêu cầu</li>
 				</ul>
 				<!-- /.breadcrumb -->
 			</div>

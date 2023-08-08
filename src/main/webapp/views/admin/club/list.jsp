@@ -83,7 +83,7 @@
 														</td>
 													</tr>
 												</c:forEach>
-
+												<span> Có ${model.totalItem} câu lạc bộ trong ${model.totalPage} trang </span>
 											</tbody>
 										</table>
 										<ul class="pagination" id="pagination"></ul>

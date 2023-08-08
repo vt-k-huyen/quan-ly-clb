@@ -1,17 +1,17 @@
-<%@include file="/common/taglib.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
-<c:url var="apiURL" value="/api-admin-announcement"/>
-<c:url var ="AnnouncementURL" value="/admin-announcement"/>
+<%@include file="/common/taglib.jsp"%>
+<c:url var="apiURL" value="/api-admin-user"/>
+<c:url var ="UserURL" value="/admin-user"/>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Danh sách thông báo</title>
+<meta charset="UTF-8">
+<title>Danh sách câu lạc bộ</title>
 </head>
 <body>
 	<div class="main-content">
-		<form action="<c:url value='/admin-announcement'/>" id="formSubmit" method="get" >
+		<form action="<c:url value='/admin-user'/>" id="formSubmit" method="get" >
 			<div class="main-content-inner">
 				<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 					<ul class="breadcrumb">
@@ -30,13 +30,13 @@
 											<div class="dt-buttons btn-overlap btn-group">
 												<a flag="info"
 												   class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip"
-												   title='Thêm thông báo' href='<c:url value="/admin-announcement?type=edit"/>'>
+												   title='Thêm tài khoản' href='<c:url value="/admin-user?type=edit"/>'>
 															<span>
 																<i class="fa fa-plus-circle bigger-110 purple"></i>
 															</span>
 												</a>
 												<button id="btnDelete" type="button"
-														class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" data-toggle="tooltip" title='Xóa thông báo'>
+														class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" data-toggle="tooltip" title='Xóa'>
 																<span>
 																	<i class="fa fa-trash-o bigger-110 pink"></i>
 																</span>
@@ -53,39 +53,35 @@
 											<thead>
 												<tr>
 												<th><input type="checkbox" id="checkAll"></th>
-													<th>Tiêu đề</th>
-													<th>Nội dung</th>
-													<th>Câu lạc bộ</th>
-													<th>Thời điểm viết</th>
-													<th>Người viết</th>
+													<th>Mã tài khoản</th>
+													<th>Tên tài khoản</th>
+													<th>Email</th>
+													<th>Quyền</th>
 													<th>Thao tác</th>
 												</tr>
 											</thead>
 											<tbody>
 												<c:forEach var="item" items="${model.listResult }">
 													<tr>
-														<td><input type="checkbox" value="${item.announcementID}"  id="checkbox_${item.announcementID}"></td>
-														<td>${item.title}</td>
-														<td>${item.content}</td>
-														<td>${item.clubID}</td>
-														<td>${item.createDate}</td>
-														<td>${item.createBy}</td>
+														<td><input type="checkbox" value="${item.userID}"  id="checkbox_${item.userID}"></td>
+														<td>${item.userID}</td>
+														<td>${item.userName}</td>
+														<td>${item.email}</td>
+														<td>${item.roleID}</td>
 														<td>
-															<c:url var="editURL" value="/admin-announcement">
+															<c:url var="editURL" value="/admin-user">
 																<c:param name="type" value="edit"></c:param>
-																<c:param name="announcementID" value="${item.announcementID}"></c:param>
+																<c:param name="userID" value="${item.userID}"></c:param>
 															</c:url>
 															<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-																title="Cập nhật thông báo" href='${editURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+																title="Cập nhật" href='${editURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 															</a>
 														</td>
 													</tr>
 												</c:forEach>
-												<span> Có ${model.totalItem} thônng báo trong ${model.totalPage} trang </span>
+												<span> Có ${model.totalItem} tài khoản trong ${model.totalPage} trang </span>
 											</tbody>
-											
 										</table>
-										
 										<ul class="pagination" id="pagination"></ul>
 										<input type="hidden" value="" id="page" name="page" />
 										<input type="hidden" value="" id="maxPageItem" name="maxPageItem" />
@@ -115,7 +111,7 @@
 					if(currentPage != page){
 						$('#maxPageItem').val(limit);
 						$('#page').val(page);
- 						$('#sortName').val('title');
+ 						$('#sortName').val('user_id');
 						$('#sortBy').val('asc'); 
 						$('#type').val('list'); 
 						$('#formSubmit').submit();
@@ -129,9 +125,9 @@
 	            return $(this).val();
 			 }).get();
 			data['ids'] = ids;
-			deleteAnnouncement(data);
+			deleteClub(data);
 		});
-		function deleteAnnouncement(data){
+		function deleteClub(data){
 			$.ajax({
 				url: '${apiURL}',
 				type: 'DELETE', 
@@ -139,7 +135,7 @@
 				data: JSON.stringify(data),
 				dataType: 'json',
 				success: function(result){
-					  window.location.href = "$(AnnouncementURL)?type=list&maxPageItem=2&page=1";
+					  window.location.href = "$(ClubURL)?type=list&maxPageItem=2&page=1";
 				},
 				error: function(error){
 					console.log(error);
@@ -147,6 +143,5 @@
 			});
 		}
 	</script>
-	
 </body>
 </html>

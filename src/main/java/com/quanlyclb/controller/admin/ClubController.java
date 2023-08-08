@@ -32,7 +32,6 @@ public class ClubController extends HttpServlet{
 			Pageble pageble = new PageRequest(model.getPage(), model.getMaxPageItem(),
 					new Sorter(model.getSortName(), model.getSortBy()));
 			model.setListResult(clubService.findAll(pageble));
-			System.out.print(model.getListResult());
 			model.setTotalItem(clubService.getTotalItem());
 			model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getMaxPageItem()));
 			view = "/views/admin/club/list.jsp"; 
@@ -47,6 +46,25 @@ public class ClubController extends HttpServlet{
 		rd.forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		try {
+			request.setCharacterEncoding("UTF-8");
+			response.setContentType("UTF-8");
+			System.out.println(request.getParameter("createDate"));
+			ClubModel model = FormUltil.toModel(ClubModel.class, request);
+			if(request.getParameter("btnAdd") !=null) {
+				model = clubService.save(model);	
+				System.out.println(model+"add");
+			}else if(request.getParameter("btnUpdate") !=null) {
+				model = clubService.update(model);
+				System.out.println(model+"update");
+			}
+			model.setListResult(clubService.findAll());
+			request.setAttribute(SystemConstant.MODEL, model);
+			RequestDispatcher rd = request.getRequestDispatcher("/admin-club?type=list&page=1&maxPageItem=2&sortName=club_name&sortBy=asc");
+			rd.forward(request, response);
+			/* doGet(request, response); */
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

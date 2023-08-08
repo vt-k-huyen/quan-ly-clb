@@ -2,7 +2,6 @@ package com.quanlyclb.dao;
 
 import java.util.List;
 
-import com.quanlyclb.model.ClubModel;
 import com.quanlyclb.model.UserModel;
 import com.quanlyclb.paging.Pageble;
 

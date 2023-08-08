@@ -32,7 +32,8 @@ public class ClubService implements IClubService{
 
 	@Override
 	public ClubModel save(ClubModel clubModel) {
-		clubModel.setCreateDate(new Timestamp(System.currentTimeMillis()));
+		java.util.Date date=new java.util.Date(); 
+		clubModel.setCreateDate(new java.util.Date());
 		String club = clubDao.save(clubModel); 
 		return clubDao.findOne(club);
 	}

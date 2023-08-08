@@ -1,6 +1,5 @@
 package com.quanlyclb.controller.admin.api;
 
-
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -13,21 +12,24 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quanlyclb.model.AnnouncementModel;
 import com.quanlyclb.model.UserModel;
-import com.quanlyclb.service.IAnnouncementService;
+import com.quanlyclb.service.impl.IRequestListService;
 import com.quanlyclb.utils.HttpUtil;
 import com.quanlyclb.utils.SessionUtil;
 
-@WebServlet(urlPatterns = {"/api-admin-announcement"})
-public class AnnouncementAPI extends HttpServlet {
+@WebServlet(urlPatterns = {"/api-admin-requestlist"})
+public class RequestListAPI extends HttpServlet{
+	
 	private static final long serialVersionUID = -22454567L;
 	
 	@Inject
-	private IAnnouncementService announcementService;
+	private IRequestListService requestListService;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json"); // dinh nghia ket qua tra ve json
+		response.setContentType("application/json"); 
+		// dinh nghia ket qua tra ve json
 		// Chuyen du lieu truyen vao sang Model
 		AnnouncementModel model = HttpUtil.of(request.getReader()).toModel(AnnouncementModel.class);
 		UserModel userModel = (UserModel) SessionUtil.getInstance().getValue(request, "USERMODEL");
@@ -40,17 +42,21 @@ public class AnnouncementAPI extends HttpServlet {
 		mapper.writeValue(response.getOutputStream(), model);
 		response.sendRedirect(request.getContextPath() + "/admin-announcement");
 	}
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		AnnouncementModel updateModel = HttpUtil.of(request.getReader()).toModel(AnnouncementModel.class);
-		System.out.print(updateModel.toString()+"update");
+		System.out.print(updateModel.toString() + "update");
 		updateModel = announcementService.update(updateModel);
-		mapper.writeValue(response.getOutputStream(), updateModel);	
+		mapper.writeValue(response.getOutputStream(), updateModel);
 		response.sendRedirect(request.getContextPath() + "/admin-announcement");
 	}
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
@@ -59,4 +65,3 @@ public class AnnouncementAPI extends HttpServlet {
 		mapper.writeValue(response.getOutputStream(), "{}");
 	}
 }
-

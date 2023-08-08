@@ -34,8 +34,8 @@
         </div>
     </div>
     <ul class="nav nav-list">
-        <li >
-            <a href="#" class="dropdown-toggle">
+        <li>
+          <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
                 Danh mục
@@ -43,6 +43,13 @@
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
+             <li>
+                    <a href='<c:url value="/admin-user?type=list&page=1&maxPageItem=2&sortName=user_id&sortBy=asc"/>'>
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Quản lý tài khoản
+                    </a>
+                    <b class="arrow"></b>
+                </li>
             	<li>
                     <a href='<c:url value="/admin-club?type=list&page=1&maxPageItem=2&sortName=club_name&sortBy=asc"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
@@ -57,9 +64,49 @@
                     </a>
                     <b class="arrow"></b>
                 </li>
+                <li>
+                    <a href='<c:url value="/admin-event?type=list&page=1&maxPageItem=2&sortName=event_id&sortBy=desc"/>'>
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Quản lý hoạt động/sự kiện
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li>
+                    <a href='<c:url value="/admin-member?type=list&page=1&maxPageItem=2&sortName=last_name&sortBy=asc"/>'>
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Quản lý thành viên
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+        <li >
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-list"></i>
+                <span class="menu-text"></span>
+                Xử lý yêu cầu
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+            <ul class="submenu">
+             <li>
+                    <a href='<c:url value="/admin-requestlist?type=list&page=1&maxPageItem=2&sortName=status&sortBy=asc"/>'>
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Đăng ký câu lạc bộ
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            	<li>
+                    <a href='<c:url value="/admin-memberevent?type=list&page=1&maxPageItem=2&sortName=club_name&sortBy=asc"/>'>
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Tham gia hoạt động
+                    </a>
+                    <b class="arrow"></b>
+                </li>
             </ul>
         </li>
     </ul>
+    
     <div class="sidebar-toggle sidebar-collapse">
         <i class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
     </div>

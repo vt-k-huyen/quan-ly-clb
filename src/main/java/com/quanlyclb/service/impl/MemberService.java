@@ -1,12 +1,10 @@
 package com.quanlyclb.service.impl;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import com.quanlyclb.dao.IMemberDao;
-import com.quanlyclb.model.ClubModel;
 import com.quanlyclb.model.MemberModel;
 import com.quanlyclb.paging.Pageble;
 import com.quanlyclb.service.IMemberService;

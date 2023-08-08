@@ -2,7 +2,7 @@ package com.quanlyclb.model;
 
 import java.sql.Timestamp;
 
-public class RequestModel extends  AbstractModel<RequestModel>{
+public class RequestListModel extends  AbstractModel<RequestListModel>{
 	private Long requestID;
 	private String clubID;
 	private String memberID;
@@ -52,7 +52,7 @@ public class RequestModel extends  AbstractModel<RequestModel>{
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public RequestModel(Long requestID, String clubID, String memberID, Timestamp requestTime, Timestamp acceptTime,
+	public RequestListModel(Long requestID, String clubID, String memberID, Timestamp requestTime, Timestamp acceptTime,
 			Timestamp finishTime, int status) {
 		super();
 		this.requestID = requestID;
@@ -63,7 +63,7 @@ public class RequestModel extends  AbstractModel<RequestModel>{
 		this.finishTime = finishTime;
 		this.status = status;
 	}
-	public RequestModel() {
+	public RequestListModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

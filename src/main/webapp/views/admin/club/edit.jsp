@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   	pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
@@ -30,7 +31,7 @@
 							<div class="alert alert-${alert}">${message}</div>
 						</c:if> 
 						<!-- <form id="formSubmit"> -->
-						<form id="formSubmit">
+						<form id="formSubmit" action="admin-club" method="post">
 							<c:if test="${empty model.clubID }">
 								<div class="form-group">
 									<label class="col-sm-3 control-label no-padding-right">Mã câu lac bộ</label>
@@ -44,7 +45,7 @@
 							<div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right">Tên câu lạc bộ</label>
                                 <div class="col-sm-9">                                 
-                                    <input type="text" class="form-control" id="clubID" name="clubID"
+                                    <input type="text" class="form-control" id="clubName" name="clubName"
 										value="${model.clubName}" />
                                 </div>
                             </div>
@@ -57,49 +58,49 @@
 								</div>
 							</div>
 							<br /> <br />
-							<c:if test="${empty model.clubID }">
+							<c:if test="${not empty model.clubID }">
 								<div class="form-group">
 									<label class="col-sm-3 control-label no-padding-right">Ngày thành lập</label>
 									<div class="col-sm-9">
 										<input type="text" class="form-control" id="createDate"
-											name="createDate" value="${model.createDate}" />
+											name="createDate" value="${model.createDate}" />	
 									</div>
 								</div>
 								<br/> <br/>
 							</c:if>
-							<div class="form-group">
+							<%-- <div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right">Ngày giải thể</label>
 								<div class="col-sm-9">
 									<input type="text" class="form-control" id="dissolutionDate" name="dissolutionDate"
 										value="${model.dissolutionDate}" />
 								</div>
-							</div>
+							</div> --%>
 							<div class="form-group">
 								<div class="col-sm-12">
 									<c:if test="${not empty model.clubID }">
-										<input type="button"
+										<input type="submit"
 											class="btn btn-primary"
-											value="Cập nhật" name="btnAddOrUpdateTB" id="btnAddOrUpdateTB" />
+											value="Cập nhật" name="btnUpdate" id="btnUpdate" />
 									<!-- 	<button type="submit" class="btn btn-primary" value="Cập nhật thông báo" id="btnAddOrUpdateTB">
 									<i class="fa fa-save"></i> Cập nhật thông báo
 								</button>	 -->
 									</c:if>
 									<c:if test="${empty model.clubID }">
-										<input type="button"
+										<input type="submit"
 											class="btn btn-primary"
-											value="Thêm mới" name="btnAddOrUpdateTB" id="btnAddOrUpdateTB" />
+											value="Thêm mới" name="btnAdd" id="btnAdd" />
 									</c:if>
 									
 								</div>
 							</div>
-							<input type="hidden" value="${model.clubID}" id="clubID" name="clubID" />
+							<%-- <input type="hidden" value="${model.clubID}" id="clubID" name="clubID" /> --%>
 						</form>	
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
+<!-- 	<script>
 		$('#btnAddOrUpdateTB').click(function(e) {
 			e.preventDefault(); 
 			var data = {};
@@ -145,6 +146,6 @@
 				}
 			});
 		}
-	</script>
+	</script> -->
 </body>
 </html>

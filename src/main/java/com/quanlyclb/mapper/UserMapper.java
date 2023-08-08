@@ -21,10 +21,10 @@ public class UserMapper implements RowMapper<UserModel>{
 			if(rs.getTimestamp("modify_date") != null) {
 				a.setModifyDate(rs.getTimestamp("modify_date"));
 			}
-			//a.setRoleID(rs.getString("role_id"));
+			a.setRoleID(rs.getString("role_id"));
 			try {
 				RoleModel role = new RoleModel();
-				role.setRoleID(rs.getString("id"));
+				role.setRoleID(rs.getString("role_id"));
 				role.setRoleName(rs.getString("role_name"));
 				a.setRole(role);
 			} catch (Exception e) {

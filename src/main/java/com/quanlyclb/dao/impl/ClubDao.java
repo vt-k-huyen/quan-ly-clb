@@ -17,7 +17,7 @@ public class ClubDao extends AbstractDao<ClubModel> implements IClubDao{
 
 	@Override
 	public ClubModel findOne(String clubID) {
-		String sql = "SELECT * FROM clubs WHERE club_id = ?";
+		String sql = "SELECT * FROM clubs WHERE club_id LIKE ?";
 		List<ClubModel> club = query(sql,new ClubMapper(), clubID);
 		return club.isEmpty() ? null : club.get(0);
 	}

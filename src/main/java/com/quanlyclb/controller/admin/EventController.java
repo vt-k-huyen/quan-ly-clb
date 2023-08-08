@@ -1,4 +1,4 @@
- package com.quanlyclb.controller.admin;
+package com.quanlyclb.controller.admin;
 
 import java.io.IOException;
 
@@ -11,46 +11,48 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.quanlyclb.constant.SystemConstant;
-import com.quanlyclb.model.AnnouncementModel;
+import com.quanlyclb.model.EventModel;
 import com.quanlyclb.paging.PageRequest;
 import com.quanlyclb.paging.Pageble;
-import com.quanlyclb.service.IAnnouncementService;
-import com.quanlyclb.service.IClubService;
+import com.quanlyclb.service.IEventService;
 import com.quanlyclb.sort.Sorter;
 import com.quanlyclb.utils.FormUltil;
 
-@WebServlet(urlPatterns = {"/admin-announcement"})
-public class AnnouncementController extends HttpServlet{
+@WebServlet(urlPatterns = {"/admin-event"})
+public class EventController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private IEventService eventService;
+	
+    public EventController() {
+        super();
+    }
 
-	@Inject
-	private IAnnouncementService announcementService;
-	
-	@Inject
-	private IClubService clubService;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		AnnouncementModel model = FormUltil.toModel(AnnouncementModel.class, request);
-		String view = "";
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EventModel model = FormUltil.toModel(EventModel.class, request);
+		String view  = "";
 		if(model.getType().equals(SystemConstant.LIST)) {
 			Pageble pageble = new PageRequest(model.getPage(), model.getMaxPageItem(),
 					new Sorter(model.getSortName(), model.getSortBy()));
-			model.setListResult(announcementService.findAll(pageble));
-			model.setTotalItem(announcementService.getTotalItem());
+			model.setListResult(eventService.findAll(pageble));
+			model.setTotalItem(eventService.getTotalItem());
 			model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getMaxPageItem()));
-			view = "/views/admin/announcement/list.jsp"; 
+			view = "/views/admin/event/list.jsp"; 
 		} else if(model.getType().equals(SystemConstant.EDIT)){
-			if(model.getAnnouncementID() != null) {
-				model = announcementService.findOne(model.getAnnouncementID());
+			if(model.getEventID() != null) {
+				model = eventService.findOne(model.getEventID());
 			}
-			request.setAttribute("clubs", clubService.findAll());
-			view = "/views/admin/announcement/edit.jsp";	
+			view = "/views/admin/event/edit.jsp";
 		}
 		request.setAttribute(SystemConstant.MODEL, model);
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

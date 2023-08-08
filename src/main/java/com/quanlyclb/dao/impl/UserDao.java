@@ -3,9 +3,7 @@ package com.quanlyclb.dao.impl;
 import java.util.List;
 
 import com.quanlyclb.dao.IUserDao;
-import com.quanlyclb.mapper.ClubMapper;
 import com.quanlyclb.mapper.UserMapper;
-import com.quanlyclb.model.ClubModel;
 import com.quanlyclb.model.UserModel;
 import com.quanlyclb.paging.Pageble;
 
@@ -28,7 +26,7 @@ public class UserDao extends AbstractDao<UserModel> implements IUserDao{
 
 	@Override
 	public List<UserModel> findAll(Pageble pageble) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM user_account");
+		StringBuilder sql = new StringBuilder("SELECT * FROM user_account LEFT JOIN role_account ON role_id");
 		if(pageble.getSorter() != null ) {
 			sql.append(" ORDER BY "+ pageble.getSorter().getSortName() +" " + pageble.getSorter().getSortBy() + "");
 		}	
@@ -48,10 +46,9 @@ public class UserDao extends AbstractDao<UserModel> implements IUserDao{
 	@Override
 	public String save(UserModel userModel) {
 		StringBuilder sql = new StringBuilder("INSERT INTO user_account(user_id, user_name, email, password, role_id, create_date)");
-		sql.append(" VALUES ?,?,?,?,?,?");
-		sql.append(" ; INSERT INTO members(member_id) VALUE(?)");
+		sql.append(" VALUES (?,?,?,?,?,?)");
 		return insertByID(sql.toString(),userModel.getUserID(), userModel.getUserName(),
-				userModel.getEmail(), userModel.getPassword(), userModel.getRoleID(),userModel.getCreateDate(),userModel.getUserID());
+				userModel.getEmail(), userModel.getPassword(), userModel.getRoleID(),userModel.getCreateDate());
 	}
 
 	@Override
