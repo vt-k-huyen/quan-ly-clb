@@ -10,4 +10,5 @@ public interface GenericDao<T> {
 	Long insert(String sql, Object... parameters);
 	String insertByID(String sql, Object... parameters);
 	int count(String sql, Object... parameters);
+	public void insertString(String sql, Object... parameters);
 }

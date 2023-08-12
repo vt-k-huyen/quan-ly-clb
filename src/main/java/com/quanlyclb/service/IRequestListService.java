@@ -1,4 +1,4 @@
-package com.quanlyclb.service.impl;
+package com.quanlyclb.service;
 
 import java.util.List;
 
@@ -12,6 +12,6 @@ public interface IRequestListService {
 	RequestListModel save(RequestListModel requestModel);
 	RequestListModel accept(RequestListModel acceptRequest);
 	RequestListModel finish(RequestListModel finishRequest);
-	void delete(long requestID);
+	void deleteOne(long requestID);
 	int getTotalItem();
 }

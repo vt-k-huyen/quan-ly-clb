@@ -15,8 +15,10 @@
 			<div class="main-content-inner">
 				<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 					<ul class="breadcrumb">
-						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">Trang
+						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="/QuanLyCLB/admin-home">Trang
 								chủ</a></li>
+						<li class="active">Xử lý yêu cầu</li>
+						<li class="active">Đăng ký câu lạc bộ</li>
 					</ul>
 					<!-- /.breadcrumb -->
 				</div>
@@ -28,13 +30,6 @@
 									<div class="table-btn-controls">
 										<div class="pull-right tableTools-container">
 											<div class="dt-buttons btn-overlap btn-group">
-												<%-- <a flag="info"
-												   class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip"
-												   title='Thêm hoạt động' href='<c:url value="/admin-event?type=edit"/>'>
-															<span>
-																<i class="fa fa-plus-circle bigger-110 purple"></i>
-															</span>
-												</a> --%>
 												<button id="btnDelete" type="button"
 														class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" data-toggle="tooltip" title='Xóa'>
 																<span>
@@ -54,7 +49,9 @@
 												<tr>
 													<th><input type="checkbox" id="checkAll"></th>
 													<th>Mã sinh viên</th>
-													<th>Mã CLB</th>
+													<th>Họ đệm</th>
+													<th>Tên</th>
+													<th>Tên CLB</th>
 													<th>Trạng thái</th>
 													<th></th>
 												</tr>
@@ -64,15 +61,33 @@
 													<tr>
 														<td><input type="checkbox" value="${item.requestID}"  id="checkbox_${item.requestID}"></td>
 														<td>${item.memberID}</td>
-														<td>${item.clubID}</td>
-														<td>${item.status}</td>
+														<c:forEach var="members" items="${members}">
+															<c:if test="${members.memberID.equals(item.memberID)}">
+																<td>${members.firstName}</td>
+																<td>${members.lastName }</td>
+															</c:if>
+														</c:forEach>
+														<c:forEach var="clubs" items="${clubs}">
+															<c:if test="${clubs.clubID.equals(item.clubID)}">
+																<td>${clubs.clubName}</td>
+															</c:if>
+														</c:forEach> 
+														<c:if test="${item.status == 0}">
+															<td>Chưa duyệt</td>
+														</c:if>
+														<c:if test="${item.status == 1}">
+															<td>Thành viên</td>
+														</c:if>
+														<c:if test="${item.status == 2}">
+															<td>Cựu thành viên</td>
+														</c:if>
 														<td>
 															<c:url var="editURL" value="/admin-requestlist">
 																<c:param name="type" value="edit"></c:param>
 																<c:param name="requestID" value="${item.requestID}"></c:param>
 															</c:url>
 															<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-																title="Cập nhật" href='${editURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+																title="Xử lý yêu cầu" href='${editURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 															</a>
 														</td>
 													</tr>
@@ -99,7 +114,7 @@
 	<script> 
 		var totalPage = ${model.totalPage};
 		var currentPage = ${model.page};
-		var limit = 2;
+		var limit = 5;
 		$(function() {
 			window.pagObj = $('#pagination').twbsPagination({
 				totalPages : totalPage,

@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quanlyclb.model.AnnouncementModel;
-import com.quanlyclb.model.UserModel;
-import com.quanlyclb.service.impl.IRequestListService;
+import com.quanlyclb.model.RequestListModel;
+import com.quanlyclb.service.IRequestListService;
 import com.quanlyclb.utils.HttpUtil;
-import com.quanlyclb.utils.SessionUtil;
 
 @WebServlet(urlPatterns = {"/api-admin-requestlist"})
 public class RequestListAPI extends HttpServlet{
@@ -31,14 +30,12 @@ public class RequestListAPI extends HttpServlet{
 		response.setContentType("application/json"); 
 		// dinh nghia ket qua tra ve json
 		// Chuyen du lieu truyen vao sang Model
-		AnnouncementModel model = HttpUtil.of(request.getReader()).toModel(AnnouncementModel.class);
-		UserModel userModel = (UserModel) SessionUtil.getInstance().getValue(request, "USERMODEL");
-		model.setCreateBy(userModel.getUserName());
+		RequestListModel model = HttpUtil.of(request.getReader()).toModel(RequestListModel.class);
 		// model.setCreateBy(((UserModel)
 		// SessionUtil.getInstance().getValue(request,"USERMODEL")).getUserName());
 		response.getWriter().print(model.toString());
 		System.out.print(model.toString());
-		model = announcementService.save(model);
+		model = requestListService.save(model);
 		mapper.writeValue(response.getOutputStream(), model);
 		response.sendRedirect(request.getContextPath() + "/admin-announcement");
 	}
@@ -48,9 +45,18 @@ public class RequestListAPI extends HttpServlet{
 		ObjectMapper mapper = new ObjectMapper();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
-		AnnouncementModel updateModel = HttpUtil.of(request.getReader()).toModel(AnnouncementModel.class);
+		String accept = request.getParameter("btnAccept");
+		String finish = request.getParameter("btnFinish");
+		System.out.print(accept);
+		System.out.print(finish);
+		RequestListModel updateModel = HttpUtil.of(request.getReader()).toModel(RequestListModel.class);
+		if(accept != null ) {
+			updateModel = requestListService.accept(updateModel);
+		} else if(finish != null ){
+			 updateModel = requestListService.finish(updateModel);
+		}
 		System.out.print(updateModel.toString() + "update");
-		updateModel = announcementService.update(updateModel);
+		updateModel = requestListService.accept(updateModel);
 		mapper.writeValue(response.getOutputStream(), updateModel);
 		response.sendRedirect(request.getContextPath() + "/admin-announcement");
 	}
@@ -61,7 +67,7 @@ public class RequestListAPI extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		AnnouncementModel deleteModel = HttpUtil.of(request.getReader()).toModel(AnnouncementModel.class);
-		announcementService.delete(deleteModel.getIds());
+		/* requestListService.delete(deleteModel.getIds()); */
 		mapper.writeValue(response.getOutputStream(), "{}");
 	}
 }

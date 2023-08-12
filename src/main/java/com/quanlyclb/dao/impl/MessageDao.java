@@ -80,6 +80,12 @@ public class MessageDao implements IMessageDao{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public void insertString(String sql, Object... parameters) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

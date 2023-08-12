@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import com.quanlyclb.dao.IRequestListDao;
 import com.quanlyclb.model.RequestListModel;
 import com.quanlyclb.paging.Pageble;
+import com.quanlyclb.service.IRequestListService;
 
 public class RequestListService implements IRequestListService{
 
@@ -38,18 +39,20 @@ public class RequestListService implements IRequestListService{
 
 	@Override
 	public RequestListModel accept(RequestListModel acceptRequest) {
+		acceptRequest.setAcceptTime(new Timestamp(System.currentTimeMillis()));
 		requestListDao.accept(acceptRequest);
 		return requestListDao.findOne(acceptRequest.getRequestID());
 	}
 
 	@Override
 	public RequestListModel finish(RequestListModel finishRequest) {
+		finishRequest.setFinishTime(new Timestamp(System.currentTimeMillis()));
 		requestListDao.finish(finishRequest);
 		return requestListDao.findOne(finishRequest.getRequestID());
 	}
 
 	@Override
-	public void delete(long requestID) {
+	public void deleteOne(long requestID) {
 		requestListDao.delete(requestID);
 	}
 

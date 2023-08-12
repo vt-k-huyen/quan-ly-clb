@@ -194,6 +194,42 @@ public class AbstractDao<T> implements GenericDao<T>{
 		}
 	}
 	@Override
+	public void insertString(String sql, Object... parameters) {
+		Connection cn = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			cn = getConnection();
+			cn.setAutoCommit(false);
+			statement = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			setParameter(statement, parameters);
+			statement.executeUpdate();
+			cn.commit();
+		} catch (SQLException e) {
+			if(cn != null) {
+				try {
+					cn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} finally {
+			try {
+				if(cn!= null) {
+					cn.close();
+				}
+				if(statement != null) {
+					statement.close();
+				}
+				if(resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	@Override
 	public String insertByID(String sql, Object... parameters) {
 		Connection cn = null;
 		PreparedStatement statement = null;

@@ -19,6 +19,7 @@
 					<ul class="breadcrumb">
 						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">Trang
 								chủ</a></li>
+						<li class="active">Danh sách câu lạc bộ</li>
 					</ul>
 					<!-- /.breadcrumb -->
 				</div>

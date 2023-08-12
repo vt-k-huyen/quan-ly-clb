@@ -46,35 +46,14 @@
              <li>
                     <a href='<c:url value="/admin-user?type=list&page=1&maxPageItem=2&sortName=user_id&sortBy=asc"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Quản lý tài khoản
+                        Câu lạc bộ đã tham gia
                     </a>
                     <b class="arrow"></b>
                 </li>
             	<li>
                     <a href='<c:url value="/admin-club?type=list&page=1&maxPageItem=2&sortName=club_name&sortBy=asc"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Quản lý câu lạc bộ
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li>
-                    <a href='<c:url value="/admin-announcement?type=list&page=1&maxPageItem=2&sortName=title&sortBy=asc"/>'>
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Quản lý thông báo
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li>
-                    <a href='<c:url value="/admin-event?type=list&page=1&maxPageItem=2&sortName=event_id&sortBy=desc"/>'>
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Quản lý hoạt động/sự kiện
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li>
-                    <a href='<c:url value="/admin-member?type=list&page=1&maxPageItem=2&sortName=last_name&sortBy=asc"/>'>
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Quản lý thành viên
+                        Hoạt động đã tham gia
                     </a>
                     <b class="arrow"></b>
                 </li>
@@ -84,7 +63,7 @@
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
-                Xử lý yêu cầu
+                Đăng ký
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
@@ -99,7 +78,7 @@
             	<li>
                     <a href='<c:url value="/admin-memberevent?type=list&page=1&maxPageItem=5&sortName=status&sortBy=asc"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Tham gia hoạt động
+                        Đăng ký tham gia hoạt động
                     </a>
                     <b class="arrow"></b>
                 </li>

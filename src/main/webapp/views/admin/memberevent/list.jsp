@@ -5,19 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Danh sách sinh viên</title>
+<title>Danh sách tham gia hoạt động</title>
 </head>
 <body>
-<c:url var="apiURL" value="/api-admin-member"/>
-<c:url var ="MemberURL" value="/admin-member"/>
+<c:url var="apiURL" value="/api-admin-memberevent"/>
+<c:url var ="MemberEventURL" value="/admin-memberevent"/>
 	<div class="main-content">
-		<form action="<c:url value='/admin-member'/>" id="formSubmit" method="get" >
+		<form action="<c:url value='/admin-requestlist'/>" id="formSubmit" method="get" >
 			<div class="main-content-inner">
 				<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 					<ul class="breadcrumb">
 						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">Trang
 								chủ</a></li>
-						<li class="active">Danh sách thành viên</li>
+						<li class="active">Xử lý yêu cầu</li>
+						<li class="active">Đăng ký câu lạc bộ</li>
 					</ul>
 					<!-- /.breadcrumb -->
 				</div>
@@ -29,13 +30,6 @@
 									<div class="table-btn-controls">
 										<div class="pull-right tableTools-container">
 											<div class="dt-buttons btn-overlap btn-group">
-												<%-- <a flag="info"
-												   class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip"
-												   title='Thêm hoạt động' href='<c:url value="/admin-event?type=edit"/>'>
-															<span>
-																<i class="fa fa-plus-circle bigger-110 purple"></i>
-															</span>
-												</a> --%>
 												<button id="btnDelete" type="button"
 														class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" data-toggle="tooltip" title='Xóa'>
 																<span>
@@ -57,36 +51,48 @@
 													<th>Mã sinh viên</th>
 													<th>Họ đệm</th>
 													<th>Tên</th>
-													<th>Ngày sinh</th>
-													<th>Email</th>
-													<th>Địa chỉ</th>
-													<th>SĐT</th>
-													<th>Thao tác</th>
+													<th>Hoạt động</th>
+													<th>Trạng thái</th>
+													<th></th>
 												</tr>
 											</thead>
 											<tbody>
 												<c:forEach var="item" items="${model.listResult }">
 													<tr>
-														<td><input type="checkbox" value="${item.memberID}"  id="checkbox_${item.memberID}"></td>
+														<td><input type="checkbox" value="${item.id}"  id="checkbox_${item.id}"></td>
 														<td>${item.memberID}</td>
-														<td>${item.firstName}</td>
-														<td>${item.lastName}</td>
-														<td>${item.birtDate}</td>
-														<td>${item.email}</td>
-														<td>${item.address}</td>
-														<td>${item.phoneNumber}</td>
+														<c:forEach var="members" items="${members}">
+															<c:if test="${members.memberID.equals(item.memberID)}">
+																<td>${members.firstName}</td>
+																<td>${members.lastName }</td>
+															</c:if>
+														</c:forEach>
+														<c:forEach var="events" items="${events}">
+															<c:if test="${events.eventID.equals(item.eventID)}">
+																<td>${events.eventName}</td>
+															</c:if>
+														</c:forEach> 
+														<c:if test="${item.status == 0}">
+															<td>Chưa duyệt</td>
+														</c:if>
+														<c:if test="${item.status == 1}">
+															<td>Đã duyệt</td>
+														</c:if>
+														<c:if test="${item.status == 2}">
+															<td>Từ chối</td>
+														</c:if>
 														<td>
-															<c:url var="editURL" value="/admin-member">
+															<c:url var="editURL" value="/admin-memberevent">
 																<c:param name="type" value="edit"></c:param>
-																<c:param name="memberID" value="${item.memberID}"></c:param>
+																<c:param name="id" value="${item.id}"></c:param>
 															</c:url>
 															<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-																title="Cập nhật" href='${editURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+																title="Xử lý yêu cầu" href='${editURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 															</a>
 														</td>
 													</tr>
 												</c:forEach>
-												<span> Có ${model.totalItem} thành viên trong ${model.totalPage} trang </span>
+												<span> Có ${model.totalItem} yêu cầu trong ${model.totalPage} trang </span>
 											</tbody>
 										</table>
 										<ul class="pagination" id="pagination"></ul>
@@ -108,7 +114,7 @@
 	<script> 
 		var totalPage = ${model.totalPage};
 		var currentPage = ${model.page};
-		var limit = 2;
+		var limit = 5;
 		$(function() {
 			window.pagObj = $('#pagination').twbsPagination({
 				totalPages : totalPage,
@@ -118,7 +124,7 @@
 					if(currentPage != page){
 						$('#maxPageItem').val(limit);
 						$('#page').val(page);
- 						$('#sortName').val('last_name');
+ 						$('#sortName').val('status');
 						$('#sortBy').val('asc'); 
 						$('#type').val('list'); 
 						$('#formSubmit').submit();

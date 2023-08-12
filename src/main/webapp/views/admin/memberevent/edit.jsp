@@ -18,6 +18,7 @@
 					<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">Trang
 							chủ</a></li>
 					<li class="active">Xử lý yêu cầu</li>
+					<li class="active">Tham gia hoạt động</li>
 				</ul>
 				<!-- /.breadcrumb -->
 			</div>
@@ -25,29 +26,25 @@
 			
 				<div class="row">
 					<div class="col-xs-12">
-					<form action="admin-requestlist" method="post">
+					<form action="admin-memberevent" method="post">
 						<!-- <div class="widget-box table-filter"> -->
 							<div class="table-btn-controls">
 								<div class="pull-right tableTools-container">
 									<div class="dt-buttons btn-overlap btn-group">
-										<!-- <button id="btnAccept" type="button" class="dt-button buttons-html5 btn btn-info" data-toggle="tooltip" >
-											Duyệt thành viên
-										</button> -->
 										<c:if test="${model.status == 0 }">
 											<input type="submit" class="dt-button buttons-html5 btn btn-success" 
 												value="Duyệt thành viên" name="btnAccept" id="btnUpdate" />
 											<input type="submit" class="dt-button buttons-html5 btn btn-danger" 
-												value="Xóa" name="btnDelete" id="btnDelete"/>
+												value="Từ chối" name="btnReject" id="btnReject"/>
 										</c:if>
-										<c:if test="${model.status == 1 }">
-											<input type="submit" class="dt-button buttons-html5 btn btn-info" 
-												value="Duyệt cựu thành viên" name="btnFinish" id="btnUpdate"/>
-										</c:if>	
+										<%-- <c:if test="${model.status == 1 }">
+											
+										</c:if>	 --%>
 										<c:if test="${model.status == 2 }">
 											<input type="submit" class="dt-button buttons-html5 btn btn-danger" 
 												value="Xóa" name="btnDelete" id="btnDelete"/>
 										</c:if>
-											<input type="hidden" value="${model.requestID}" id="requestID" name="requestID" />
+											<input type="hidden" value="${model.id}" id="id" name="id" />
 									</div>
 								</div>
 							</div>
@@ -65,7 +62,6 @@
 												sinh viên</strong></label>
 										<div class="col-sm-9">
 											<label class="control-label">${model.memberID}</label> 
-											<!-- <input type="hidden" name="memberID" id="memberID"> -->
 										</div>
 									</div>
 									<br />
@@ -83,21 +79,11 @@
 									</div>
 									<br />
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right"><strong>Mã
-												CLB</strong></label>
+										<label class="col-sm-3 control-label no-padding-right"><strong>Hoạt động</strong></label>
 										<div class="col-sm-9">
-											<label class="control-label">${model.clubID} </label> 
-											<!-- <input type="hidden" id="clubID" name="clubID" /> -->
-										</div>
-									</div>
-									<br />
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right"><strong>Tên
-												CLB</strong></label>
-										<div class="col-sm-9">
-											<c:forEach var="clubs" items="${clubs}">
-												<c:if test="${clubs.clubID.equals(model.clubID)}">
-													<label class="control-label">${clubs.clubName}</label>
+											<c:forEach var="events" items="${events}">
+												<c:if test="${events.eventID.equals(model.eventID)}">
+													<label class="control-label">${events.eventName}</label>
 												</c:if>
 											</c:forEach>
 										</div>
@@ -113,39 +99,16 @@
 										</c:if>
 										<c:if test="${model.status == 1}">
 											<div class="col-sm-9">
-												<label class="control-label">Thành viên</label>
+												<label class="control-label">Đã tham gia</label>
 											</div>
 										</c:if>
 										<c:if test="${model.status == 2}">
 											<div class="col-sm-9">
-												<label class="control-label">Cựu thành viên</label>
+												<label class="control-label">Đã từ chối</label>
 											</div>
 										</c:if>
 									</div>
 									<br />
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right"><strong>Thời
-												điểm đăng ký</strong></label>
-										<div class="col-sm-9">
-											<label class="control-label">${model.requestTime }</label>
-										</div>
-									</div>
-									<br />
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right"><strong>Thời
-												điểm duyệt</strong></label>
-										<div class="col-sm-9">
-											<label class="control-label">${model.acceptTime }</label>
-										</div>
-									</div>
-									<br />
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right"><strong>Thời
-												điểm hoàn thành</strong></label>
-										<div class="col-sm-9">
-											<label class="control-label">${model.finishTime }</label>
-										</div>
-									</div>
 							</div>
 						</div>
 						

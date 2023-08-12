@@ -14,7 +14,9 @@ import com.quanlyclb.constant.SystemConstant;
 import com.quanlyclb.model.RequestListModel;
 import com.quanlyclb.paging.PageRequest;
 import com.quanlyclb.paging.Pageble;
-import com.quanlyclb.service.impl.IRequestListService;
+import com.quanlyclb.service.IClubService;
+import com.quanlyclb.service.IMemberService;
+import com.quanlyclb.service.IRequestListService;
 import com.quanlyclb.sort.Sorter;
 import com.quanlyclb.utils.FormUltil;
 
@@ -26,6 +28,12 @@ public class RequestListController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	@Inject
 	private IRequestListService requestListService;
+	
+	@Inject
+	private IClubService clubService;
+	
+	@Inject
+	private IMemberService memberService;
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -44,11 +52,29 @@ public class RequestListController extends HttpServlet{
 			}
 			view = "/views/admin/requestlist/edit.jsp";
 		}
+		request.setAttribute("clubs", clubService.findAll());
+		request.setAttribute("members", memberService.findAll());
 		request.setAttribute(SystemConstant.MODEL, model);
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("UTF-8");
+		long requestID = Long.parseLong(request.getParameter("requestID"));
+		RequestListModel updateModel = requestListService.findOne(requestID);
+		String accept = request.getParameter("btnAccept");
+		String finish = request.getParameter("btnFinish");
+		String delete = request.getParameter("btnDelete"); 
+		if(accept != null && updateModel.getStatus() == 0 ) {
+			updateModel = requestListService.accept(updateModel);
+			response.sendRedirect(request.getContextPath()+ "/admin-requestlist?type=list&page=1&maxPageItem=5&sortName=status&sortBy=asc");
+		} else if(finish != null && updateModel.getStatus() == 1 ){
+			 updateModel = requestListService.finish(updateModel);
+			 response.sendRedirect(request.getContextPath()+ "/admin-requestlist?type=list&page=1&maxPageItem=5&sortName=status&sortBy=asc");
+		} else if (delete != null &&( updateModel.getStatus() == 2|| updateModel.getStatus() == 1)) {
+			requestListService.deleteOne(requestID);
+			response.sendRedirect(request.getContextPath()+ "/admin-requestlist?type=list&page=1&maxPageItem=5&sortName=status&sortBy=asc");
+		}
 	}
 }
