@@ -15,15 +15,33 @@
         <div class="navbar-buttons navbar-header pull-right collapse navbar-collapse" role="navigation">
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
-                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        Xin chào, ${USERMODEL.userName}
-                    </a>
-                    <li class="light-blue dropdown-modal">
-                        <a href='<c:url value="/thoat?action=logout"/>'>
-                            <i class="ace-icon fa fa-sign-out"></i>
-                            Thoát
-                        </a>
-                    </li>
+                	<c:if test="${not empty USERMODEL}">
+                    	<a data-toggle="dropdown" href="" class="dropdown-toggle">
+                    		<i class="fa fa-user"></i>
+                       	 ${USERMODEL.userName}
+                    	</a>
+                    
+                    	<li class="light-blue dropdown-modal">
+                        	<a href='<c:url value="/doi-matkhau?action=changepass"/>'>
+                            	<i class="ace-icon fa fa-key"></i>
+                            	Đổi mật khẩu
+                        	</a>
+                    	</li>
+                    	<li class="light-blue dropdown-modal">
+                        	<a href='<c:url value="/thoat?action=logout"/>'>
+                            	<i class="ace-icon fa fa-sign-out"></i>
+                            	Thoát
+                        	</a>
+                    	</li>
+                    </c:if>	
+                    <c:if test="${empty USERMODEL}">
+                    	<li class="light-blue dropdown-modal">
+                        	<a href='<c:url value="/dang-nhap?action=login"/>'>
+                            	<i class="ace-icon fa fa-sign-in"></i>
+                            	Đăng nhập
+                        	</a>
+                    	</li>
+                    </c:if>
                </li>
             </ul>
         </div>

@@ -19,16 +19,7 @@
 			<div class="page-content">
 				<div class="row">
 					<div class="col-xs-12">
-						<div style="margin-bottom: 15px">
-							<p style="font-weight: bold">
-								<a
-									href="/News/Content/thong-bao-v-v-khai-bao-hoc-phi-cac-lop-hoc-phan-thuoc-hoc-ky-1-nam-hoc-2023-2024/">Th&#244;ng
-									b&#225;o v/v Khai b&#225;o học ph&#237; c&#225;c Lớp học phần
-									thuộc học kỳ 1, năm học 2023-2024.</a> <br /> <small
-									class="text-muted">[09/08/2023 15:14]</small>
-							</p>
-							<p>dsksdkj</p>
-						</div>
+						
 					</div>
 				</div>
 			</div>
