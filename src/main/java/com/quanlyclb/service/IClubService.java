@@ -13,4 +13,6 @@ public interface IClubService {
 	ClubModel update(ClubModel updateClub);
 	void delete(String clubID);
 	int getTotalItem();	
+	List<ClubModel> findClubs(String memberID, Pageble pageble);
+	int count(String memberID, Pageble pageble);
 }

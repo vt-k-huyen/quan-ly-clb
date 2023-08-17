@@ -32,10 +32,10 @@ public class ClubService implements IClubService{
 
 	@Override
 	public ClubModel save(ClubModel clubModel) {
-		java.util.Date date=new java.util.Date(); 
-		clubModel.setCreateDate(new java.util.Date());
-		String club = clubDao.save(clubModel); 
-		return clubDao.findOne(club);
+		clubModel.setCreateDate(new Timestamp(System.currentTimeMillis()));
+		clubDao.save(clubModel); 
+		String clubID = clubModel.getClubID();
+		return clubDao.findOne(clubID);
 	}
 
 	@Override
@@ -54,6 +54,17 @@ public class ClubService implements IClubService{
 	@Override
 	public int getTotalItem() {
 		return clubDao.getTotalItem();
+	}
+
+	@Override
+	public List<ClubModel> findClubs(String memberID, Pageble pageble) {
+		return clubDao.findClubs(memberID, pageble);
+	}
+
+	@Override
+	public int count(String memberID, Pageble pageble) {
+		List<ClubModel> list =  clubDao.findAll();
+		return list.size();
 	}
 
 }

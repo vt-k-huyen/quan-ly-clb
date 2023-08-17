@@ -8,5 +8,5 @@ public class StatusModel {
 	// Thành viên đã rời clb
 	public final int FINISHED = 3;
 	// Hủy yêu cầu tham gia
-	public final int CANCEL = 4;	
+	public final int CANCEL = -1;	
 }

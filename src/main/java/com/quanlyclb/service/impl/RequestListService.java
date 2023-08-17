@@ -61,4 +61,20 @@ public class RequestListService implements IRequestListService{
 		return requestListDao.getTotalItem();
 	}
 
+	@Override
+	public List<RequestListModel> findClubs(String memberID, Pageble pageble) {
+		return requestListDao.findClubs(memberID, pageble);
+	}
+
+	@Override
+	public int count(String memberID, Pageble pageble) {
+		List<RequestListModel> list = requestListDao.findClubs(memberID,pageble);
+		int t = 0;
+		for(RequestListModel rq : list) {
+			t++;
+		}
+		return t;
+	}
+
+
 }

@@ -33,7 +33,8 @@ public class UserService implements IUserService{
 	@Override
 	public UserModel save(UserModel userModel) {
 		userModel.setCreateDate(new Timestamp(System.currentTimeMillis()));
-		String userID = userDao.save(userModel);
+		userDao.save(userModel);
+		String userID = userModel.getUserID();
 		return userDao.findOne(userID);
 	}
 	@Override
@@ -51,6 +52,10 @@ public class UserService implements IUserService{
 	@Override
 	public int getTotalItem() {
 		return userDao.getTotalItem();
+	}
+	@Override
+	public void ChangePassword(String userID, String pass) {
+		userDao.ChangePassword(userID,pass);
 	}
 
 }

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- <meta charset="UTF-8"> -->
+		<meta charset="UTF-8">
 		<title><dec:title default="Trang chủ" /></title>
 		<link rel="stylesheet"
 			href="<c:url value='/template/admin/assets/css/bootstrap.min.css' />" />

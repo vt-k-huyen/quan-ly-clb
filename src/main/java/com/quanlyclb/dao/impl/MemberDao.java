@@ -34,10 +34,10 @@ public class MemberDao extends AbstractDao<MemberModel> implements IMemberDao{
 	}
 
 	@Override
-	public String save(MemberModel memberModel) {
+	public void save(MemberModel memberModel) {
 		StringBuilder sql = new StringBuilder("INSERT INTO members(member_id, first_name, last_name, birth_date, email, address, photo, phone_number, notes)");
 		sql.append(" VALUES(?,?,?,?,?,?,?,?.?)");
-		return insertByID(sql.toString(), memberModel.getMemberID(), memberModel.getFirstName(), memberModel.getLastName(), memberModel.getBirtDate(),
+		insertByID(sql.toString(), memberModel.getMemberID(), memberModel.getFirstName(), memberModel.getLastName(), memberModel.getBirtDate(),
 				memberModel.getEmail(), memberModel.getAddress(), memberModel.getPhoto(), memberModel.getPhoneNumber(), memberModel.getNotes());
 	}
 
@@ -61,6 +61,7 @@ public class MemberDao extends AbstractDao<MemberModel> implements IMemberDao{
 		String sql  = "SELECT count(*) FROM members";
 		return count(sql);
 	}
+
 
 
 }

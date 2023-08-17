@@ -8,6 +8,7 @@ import com.quanlyclb.paging.Pageble;
 public interface IEventDao extends GenericDao<EventModel>{
 	List<EventModel> findAll();
 	List<EventModel> findAll(Pageble pageble);
+	List<EventModel> findEvents(String memberID, Pageble pageble);
 	EventModel findOne(long eventID);
 	Long save(EventModel eventModel);
 	void update(EventModel updateEvent);

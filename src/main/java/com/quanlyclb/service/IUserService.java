@@ -14,4 +14,5 @@ public interface IUserService {
 	UserModel update(UserModel updateUser);
 	void delete(String userID);
 	int getTotalItem();	
+	void ChangePassword(String userID, String pass);
 }

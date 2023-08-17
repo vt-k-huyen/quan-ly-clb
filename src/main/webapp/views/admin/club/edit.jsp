@@ -30,9 +30,7 @@
 						<c:if test="${not empty message}">
 							<div class="alert alert-${alert}">${message}</div>
 						</c:if> 
-						<!-- <form id="formSubmit"> -->
 						<form id="formSubmit" action="admin-club" method="post">
-							<c:if test="${empty model.clubID }">
 								<div class="form-group">
 									<label class="col-sm-3 control-label no-padding-right">Mã câu lac bộ</label>
 									<div class="col-sm-9">
@@ -40,7 +38,7 @@
 										value="${model.clubID}" />
 									</div>
 								</div>
-							</c:if>
+						<%-- 	</c:if> --%>
 							<br /> <br />
 							<div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right">Tên câu lạc bộ</label>
@@ -68,22 +66,12 @@
 								</div>
 								<br/> <br/>
 							</c:if>
-							<%-- <div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right">Ngày giải thể</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" id="dissolutionDate" name="dissolutionDate"
-										value="${model.dissolutionDate}" />
-								</div>
-							</div> --%>
 							<div class="form-group">
 								<div class="col-sm-12">
 									<c:if test="${not empty model.clubID }">
 										<input type="submit"
 											class="btn btn-primary"
 											value="Cập nhật" name="btnUpdate" id="btnUpdate" />
-									<!-- 	<button type="submit" class="btn btn-primary" value="Cập nhật thông báo" id="btnAddOrUpdateTB">
-									<i class="fa fa-save"></i> Cập nhật thông báo
-								</button>	 -->
 									</c:if>
 									<c:if test="${empty model.clubID }">
 										<input type="submit"
@@ -93,7 +81,6 @@
 									
 								</div>
 							</div>
-							<%-- <input type="hidden" value="${model.clubID}" id="clubID" name="clubID" /> --%>
 						</form>	
 					</div>
 				</div>

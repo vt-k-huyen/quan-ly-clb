@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp"%>
-<c:url var="apiURL" value="/api-admin-requestlist"/>
-<c:url var ="RequestListURL" value="/admin-requestlist"/>
 <html>
 <head>
 <title>Xử lý yêu cầu</title>
@@ -17,7 +15,8 @@
 				<ul class="breadcrumb">
 					<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">Trang
 							chủ</a></li>
-					<li class="active">Xử lý yêu cầu</li>
+					<li class="active">Danh mục</li>
+					<li class="active">Câu lạc bô đã tham gia</li>
 				</ul>
 				<!-- /.breadcrumb -->
 			</div>
@@ -26,34 +25,28 @@
 				<div class="row">
 					<div class="col-xs-12">
 					<form action="admin-requestlist" method="post">
+						<!-- <div class="widget-box table-filter"> -->
 							<div class="table-btn-controls">
 								<div class="pull-right tableTools-container">
 									<div class="dt-buttons btn-overlap btn-group">
 										<c:if test="${model.status == 0 }">
-											<input type="submit" class="dt-button buttons-html5 btn btn-success" 
-												value="Duyệt thành viên" name="btnAccept" id="btnUpdate" />
 											<input type="submit" class="dt-button buttons-html5 btn btn-danger" 
-												value="Xóa" name="btnDelete" id="btnDelete"/>
+												value="Hủy đăng ký" name="btnCancle" id="btnCancle"/>
 										</c:if>
 										<c:if test="${model.status == 1 }">
 											<input type="submit" class="dt-button buttons-html5 btn btn-info" 
-												value="Duyệt cựu thành viên" name="btnFinish" id="btnUpdate"/>
+												value="Rời câu lạc bộ" name="btnOut" id="btnOut"/>
 										</c:if>	
-										<c:if test="${model.status == 2 }">
-											<input type="submit" class="dt-button buttons-html5 btn btn-danger" 
-												value="Xóa" name="btnDelete" id="btnDelete"/>
-										</c:if>
 											<input type="hidden" value="${model.requestID}" id="requestID" name="requestID" />
 									</div>
 								</div>
 							</div>
 						</form>
+						<!-- </div> -->
 
 						<div class="row">
 							<div class="col-xs-12">
-								<%-- <c:if test="${not empty message}">
-									<div class="alert alert-${alert}">${message}</div>
-								</c:if> --%>
+								<!-- <form id="formSubmit"> -->
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right"><strong>Mã
 												sinh viên</strong></label>
@@ -61,27 +54,13 @@
 											<label class="control-label">${model.memberID}</label> 
 											<!-- <input type="hidden" name="memberID" id="memberID"> -->
 										</div>
-									</div>
-									<br />
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right"><strong>Họ
-												tên</strong></label>
-										<div class="col-sm-9">
-											<c:forEach var="members" items="${members}">
-												<c:if test="${members.memberID.equals(model.memberID)}">
-													<label class="control-label">${members.firstName}
-														${members.lastName }</label>
-												</c:if>
-											</c:forEach>
-										</div>
-									</div>
+									</div>	
 									<br />
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right"><strong>Mã
 												CLB</strong></label>
 										<div class="col-sm-9">
 											<label class="control-label">${model.clubID} </label> 
-											<!-- <input type="hidden" id="clubID" name="clubID" /> -->
 										</div>
 									</div>
 									<br />
@@ -127,7 +106,7 @@
 									<br />
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right"><strong>Thời
-												điểm duyệt</strong></label>
+												điểm xử lý</strong></label>
 										<div class="col-sm-9">
 											<label class="control-label">${model.acceptTime }</label>
 										</div>

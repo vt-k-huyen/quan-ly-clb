@@ -40,31 +40,32 @@ public class ClubController extends HttpServlet{
 				model = clubService.findOne(model.getClubID());
 			}
 			view = "/views/admin/club/edit.jsp";
+		} else if(model.getType().equals(SystemConstant.DELETE)){
+			if(model.getClubID() != null) {
+				clubService.delete(model.getClubID());
+			}
+			view = "/admin-club?type=list&page=1&maxPageItem=2&sortName=club_name&sortBy=asc";
 		}
 		request.setAttribute(SystemConstant.MODEL, model);
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			request.setCharacterEncoding("UTF-8");
-			response.setContentType("UTF-8");
-			System.out.println(request.getParameter("createDate"));
-			ClubModel model = FormUltil.toModel(ClubModel.class, request);
-			if(request.getParameter("btnAdd") !=null) {
-				model = clubService.save(model);	
-				System.out.println(model+"add");
-			}else if(request.getParameter("btnUpdate") !=null) {
-				model = clubService.update(model);
-				System.out.println(model+"update");
+			try {
+				request.setCharacterEncoding("UTF-8");
+				response.setContentType("UTF-8");
+				ClubModel model = FormUltil.toModel(ClubModel.class, request);
+				if(request.getParameter("btnAdd") !=null) {
+					clubService.save(model);	
+					response.sendRedirect(request.getContextPath() + "/admin-club?type=list&page=1&maxPageItem=2&sortName=club_name&sortBy=asc");
+				}else if(request.getParameter("btnUpdate") !=null) {
+					clubService.update(model);
+					response.sendRedirect(request.getContextPath() + "/admin-club?type=list&page=1&maxPageItem=2&sortName=club_name&sortBy=asc");
+				}
+				RequestDispatcher rd = request.getRequestDispatcher("/admin-club?type=list&page=1&maxPageItem=2&sortName=club_name&sortBy=asc");
+				rd.forward(request, response);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
-			model.setListResult(clubService.findAll());
-			request.setAttribute(SystemConstant.MODEL, model);
-			RequestDispatcher rd = request.getRequestDispatcher("/admin-club?type=list&page=1&maxPageItem=2&sortName=club_name&sortBy=asc");
-			rd.forward(request, response);
-			/* doGet(request, response); */
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
 	}
 }

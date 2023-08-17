@@ -44,10 +44,10 @@ public class UserDao extends AbstractDao<UserModel> implements IUserDao{
 	}
 
 	@Override
-	public String save(UserModel userModel) {
+	public void save(UserModel userModel) {
 		StringBuilder sql = new StringBuilder("INSERT INTO user_account(user_id, user_name, email, password, role_id, create_date)");
 		sql.append(" VALUES (?,?,?,?,?,?)");
-		return insertByID(sql.toString(),userModel.getUserID(), userModel.getUserName(),
+		insertByID(sql.toString(),userModel.getUserID(), userModel.getUserName(),
 				userModel.getEmail(), userModel.getPassword(), userModel.getRoleID(),userModel.getCreateDate());
 	}
 
@@ -69,5 +69,10 @@ public class UserDao extends AbstractDao<UserModel> implements IUserDao{
 		String sql  = "SELECT count(*) FROM user_account";
 		return count(sql);
 	}
-	
+
+	@Override
+	public void ChangePassword(String userID, String pass) {
+		StringBuilder sql = new StringBuilder("UPDATE user_account SET password = ? WHERE user_id LIKE ? ");
+		update(sql.toString(), pass, userID);
+	}
 }

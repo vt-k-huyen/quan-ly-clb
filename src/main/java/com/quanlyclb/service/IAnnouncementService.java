@@ -13,5 +13,6 @@ public interface IAnnouncementService {
 	AnnouncementModel save(AnnouncementModel announcementModel);
 	AnnouncementModel update(AnnouncementModel updateAnnouncement);
 	void delete(long[] announcementID);
+	void deleteOne(long announcementID);
 	int getTotalItem();	
 }

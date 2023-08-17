@@ -10,8 +10,9 @@ public interface IUserDao extends GenericDao<UserModel>{
 	List<UserModel> findAll();
 	List<UserModel> findAll(Pageble pageble);
 	UserModel findOne(String userID);
-	String save(UserModel userModel);
+	void save(UserModel userModel);
 	void update(UserModel updateUser);
 	void delete(String userID);
 	int getTotalItem();
+	void ChangePassword(String userID, String pass);
 }

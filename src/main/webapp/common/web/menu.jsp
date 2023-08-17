@@ -43,15 +43,22 @@
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
+          	  <li>
+                    <a href='<c:url value="/announcement?type=list&page=1&maxPageItem=5&sortName=create_date&sortBy=desc"/>'>
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Thông báo
+                    </a>
+                    <b class="arrow"></b>
+              </li>
              <li>
-                    <a href='<c:url value="/admin-user?type=list&page=1&maxPageItem=2&sortName=user_id&sortBy=asc"/>'>
+                    <a href='<c:url value="/club?type=list&page=1&maxPageItem=5&sortName=status&sortBy=asc"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
                         Câu lạc bộ đã tham gia
                     </a>
                     <b class="arrow"></b>
                 </li>
             	<li>
-                    <a href='<c:url value="/admin-club?type=list&page=1&maxPageItem=2&sortName=club_name&sortBy=asc"/>'>
+                    <a href='<c:url value="/event?type=list&page=1&maxPageItem=5&sortName=status&sortBy=asc"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
                         Hoạt động đã tham gia
                     </a>
@@ -69,14 +76,14 @@
             <b class="arrow"></b>
             <ul class="submenu">
              <li>
-                    <a href='<c:url value="/admin-requestlist?type=list&page=1&maxPageItem=5&sortName=status&sortBy=asc"/>'>
+                    <a href='<c:url value="/memberclub?type=list&page=1&maxPageItem=5&sortName=club_name&sortBy=asc"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
                         Đăng ký câu lạc bộ
                     </a>
                     <b class="arrow"></b>
                 </li>
             	<li>
-                    <a href='<c:url value="/admin-memberevent?type=list&page=1&maxPageItem=5&sortName=status&sortBy=asc"/>'>
+                    <a href='<c:url value="/memberevent?type=list&page=1&maxPageItem=5&sortName=event_id&sortBy=desc"/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
                         Đăng ký tham gia hoạt động
                     </a>

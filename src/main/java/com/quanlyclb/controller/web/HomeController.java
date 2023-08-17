@@ -11,8 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.quanlyclb.constant.SystemConstant;
+import com.quanlyclb.model.AnnouncementModel;
 import com.quanlyclb.model.UserModel;
+import com.quanlyclb.paging.PageRequest;
+import com.quanlyclb.paging.Pageble;
+import com.quanlyclb.service.IAnnouncementService;
 import com.quanlyclb.service.IUserService;
+import com.quanlyclb.sort.Sorter;
 import com.quanlyclb.utils.FormUltil;
 import com.quanlyclb.utils.SessionUtil;
 
@@ -21,7 +27,11 @@ public class HomeController extends HttpServlet {
 
 	@Inject
 	private IUserService userService;
-	private static final long serialVersionUID = 2686801510274002166L;
+	
+	@Inject
+	private IAnnouncementService announcementService;
+	
+	private static final long serialVersionUID = 166L;
 	ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,8 +49,8 @@ public class HomeController extends HttpServlet {
 		} else if (action != null && action.equals("logout")) {
 				SessionUtil.getInstance().removeValue(request, "USERMODEL");
 				/* response.sendRedirect(request.getContextPath() + "/trang-chu"); */
-				RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
-				rd.forward(request, response);
+					RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
+					rd.forward(request, response);
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/web/home.jsp");
 			rd.forward(request, response);
@@ -58,7 +68,8 @@ public class HomeController extends HttpServlet {
 			if (model != null) {
 				SessionUtil.getInstance().putValue(request, "USERMODEL", model);
 				if (model.getRole().getRoleID().equals("USER")) {
-					response.sendRedirect(request.getContextPath() + "/trang-chu");
+					 response.sendRedirect(request.getContextPath() + "/trang-chu");
+					 
 				} else if (model.getRole().getRoleID().equals("ADMIN")) {
 					response.sendRedirect(request.getContextPath() + "/admin-home");
 				}

@@ -45,7 +45,8 @@ public class AuthorizationFilter implements Filter
 				response.sendRedirect(
 						request.getContextPath() + "/dang-nhap?action=login&message=not_login&alert=danger");
 			}
-		} else {
+		} 
+		else  {
 			filterChain.doFilter(servletRequest, servletResponse);
 		}
 	}

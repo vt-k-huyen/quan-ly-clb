@@ -51,4 +51,16 @@ public class EventService implements IEventService {
 		return eventDao.getTotalItem();
 	}
 
+	@Override
+	public List<EventModel> findEvents(String memberID, Pageble pageble) {
+		return eventDao.findEvents(memberID, pageble);
+	}
+
+	@Override
+	public int count(String memberID, Pageble pageble) {
+		List<EventModel> list = eventDao.findEvents(memberID, pageble);
+		return list.size();
+	}
+
+
 }

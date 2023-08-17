@@ -69,4 +69,16 @@ public class MemberEventDao extends AbstractDao<MemberEventModel> implements IMe
 		update(sql, rejectME.getId());
 	}
 
+	@Override
+	public List<MemberEventModel> findEvents(String memberID, Pageble pageble) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM members_events  WHERE member_id LIKE ? ");
+		if(pageble.getSorter() != null ) {
+			sql.append(" ORDER BY "+ pageble.getSorter().getSortName() +" " + pageble.getSorter().getSortBy() + "");
+		}	
+		if( pageble.getOffset() != null && pageble.getLimit() != null) {
+			sql.append(" LIMIT " + pageble.getOffset() + ", " + pageble.getLimit() +"");
+		} 
+		return query(sql.toString(), new MemberEventMapper(), memberID);
+	}
+
 }

@@ -15,4 +15,5 @@ public interface IRequestListDao extends GenericDao<RequestListModel>{
 	void finish(RequestListModel finishRequest);
 	void delete(long requestID);
 	int getTotalItem();
+	List<RequestListModel> findClubs(String memberID,Pageble pageble);
 }

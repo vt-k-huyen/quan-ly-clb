@@ -25,29 +25,19 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-						
-							<div class="widget-box table-filter">
-									<div class="table-btn-controls">
-										<div class="pull-right tableTools-container">
-											<div class="dt-buttons btn-overlap btn-group">
-												<a flag="info"
-												   class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip"
-												   title='Thêm hoạt động' href='<c:url value="/admin-event?type=edit"/>'>
-															<span>
-																<i class="fa fa-plus-circle bigger-110 purple"></i>
-															</span>
-												</a>
-												<button id="btnDelete" type="button"
-														class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" data-toggle="tooltip" title='Xóa'>
-																<span>
-																	<i class="fa fa-trash-o bigger-110 pink"></i>
-																</span>
-												</button>
-											</div>
-										</div>
+							<div class="table-btn-controls">
+								<div class="pull-right tableTools-container">
+									<div class="dt-buttons btn-overlap btn-group">
+										<a flag="info" class="btn btn-sm btn-primary btn-edit"
+											data-toggle="tooltip" title='Thêm hoạt động'
+											href='<c:url value="/admin-event?type=edit"/>'> <span>
+												<i class="fa fa-plus-circle"></i>
+										</span>
+										</a>
 									</div>
 								</div>
-								
+							</div>
+
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="table-responsive">
@@ -81,6 +71,13 @@
 															</c:url>
 															<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
 																title="Cập nhật" href='${editURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+															</a>
+															<c:url var="deleteURL" value="/admin-event">
+																<c:param name="type" value="delete"></c:param>
+																<c:param name="eventID" value="${item.eventID}"></c:param>
+															</c:url>
+															<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
+																title="Xóa" href='${deleteURL}'><i class="fa fa-trash-o" aria-hidden="true"></i>
 															</a>
 														</td>
 													</tr>

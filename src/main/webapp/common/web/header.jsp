@@ -16,12 +16,13 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                 	<c:if test="${not empty USERMODEL}">
-                    	<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                       	 Xin chào, ${USERMODEL.userName}
+                    	<a data-toggle="dropdown" href="" class="dropdown-toggle">
+                    		<i class="fa fa-user"></i>
+                       	 ${USERMODEL.userName}
                     	</a>
                     
                     	<li class="light-blue dropdown-modal">
-                        	<a href='<c:url value="/thoat?action=logout"/>'>
+                        	<a href='<c:url value="/doi-matkhau?action=changepass"/>'>
                             	<i class="ace-icon fa fa-key"></i>
                             	Đổi mật khẩu
                         	</a>

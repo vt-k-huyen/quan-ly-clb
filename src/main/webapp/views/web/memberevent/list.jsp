@@ -5,19 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Danh sách sinh viên</title>
+<title>Đăng ký tham gia hoạt động</title>
 </head>
 <body>
-<c:url var="apiURL" value="/api-admin-member"/>
-<c:url var ="MemberURL" value="/admin-member"/>
 	<div class="main-content">
-		<form action="<c:url value='/admin-member'/>" id="formSubmit" method="get" >
+		<form action="<c:url value='/memberclub'/>" id="formSubmit" method="get" >
 			<div class="main-content-inner">
 				<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 					<ul class="breadcrumb">
-						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">Trang
+						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="/QuanLyCLB/trang-chu">Trang
 								chủ</a></li>
-						<li class="active">Danh sách thành viên</li>
+						<li class="active">Đăng ký</li>
+						<li class="active">Tham gia hoạt động</li>
 					</ul>
 					<!-- /.breadcrumb -->
 				</div>
@@ -25,54 +24,44 @@
 					<div class="row">
 						<div class="col-xs-12">
 						
-								
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="table-responsive">
 										<table class="table table-bordered">
 											<thead>
 												<tr>
-													<th><input type="checkbox" id="checkAll"></th>
-													<th>Mã sinh viên</th>
-													<th>Họ đệm</th>
-													<th>Tên</th>
-													<th>Ngày sinh</th>
-													<th>Email</th>
-													<th>Địa chỉ</th>
-													<th>SĐT</th>
-													<th>Thao tác</th>
+													<th>Hoạt động</th>
+													<th>Bắt đầu</th>
+													<th>Kết thúc</th>
+													<th>Chi tiết </th>
+													<th>Câu lạc bộ</th>
+													<th></th>
 												</tr>
 											</thead>
 											<tbody>
 												<c:forEach var="item" items="${model.listResult }">
 													<tr>
-														<td><input type="checkbox" value="${item.memberID}"  id="checkbox_${item.memberID}"></td>
-														<td>${item.memberID}</td>
-														<td>${item.firstName}</td>
-														<td>${item.lastName}</td>
-														<td>${item.birtDate}</td>
-														<td>${item.email}</td>
-														<td>${item.address}</td>
-														<td>${item.phoneNumber}</td>
+														<td>${item.eventName}</td>
+														<td>${item.fromDate}</td>
+														<td>${item.toDate}</td>
+														<td>${item.detail}</td>
+														<c:forEach var="clubs" items="${clubs }">
+															<c:if test="${item.clubID.equals(clubs.clubID)}">
+																<td>${clubs.clubName}</td>
+															</c:if>
+														</c:forEach>
 														<td>
-															<c:url var="editURL" value="/admin-member">
-																<c:param name="type" value="edit"></c:param>
-																<c:param name="memberID" value="${item.memberID}"></c:param>
-															</c:url>
-															<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-																title="Cập nhật" href='${editURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-															</a>
-															<c:url var="deleteURL" value="/admin-member">
-																<c:param name="type" value="delete"></c:param>
-																<c:param name="memberID" value="${item.memberID}"></c:param>
-															</c:url>
-															<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-																title="Xóa" href='${deleteURL}'><i class="fa fa-trash-o" aria-hidden="true"></i>
-															</a>
-														</td>
+															<c:url var="editURL" value="/memberevent">
+																<c:param name="type" value="insert"></c:param>
+																<c:param name="memberID" value="${USERMODEL.userID }"></c:param>
+																<c:param name="eventID" value="${item.eventID}"></c:param>
+															</c:url> <a class="btn btn-sm btn-primary btn-edit"
+															data-toggle="tooltip" title="Tham gia"
+															href='${editURL}'><i class="fa fa-bookmark"
+																aria-hidden="true"></i> </a></td>
 													</tr>
 												</c:forEach>
-												<span> Có ${model.totalItem} thành viên trong ${model.totalPage} trang </span>
+												<span> Có ${model.totalItem} hoạt động trong ${model.totalPage} trang </span>
 											</tbody>
 										</table>
 										<ul class="pagination" id="pagination"></ul>
@@ -94,7 +83,7 @@
 	<script> 
 		var totalPage = ${model.totalPage};
 		var currentPage = ${model.page};
-		var limit = 2;
+		var limit = 5;
 		$(function() {
 			window.pagObj = $('#pagination').twbsPagination({
 				totalPages : totalPage,
@@ -104,8 +93,8 @@
 					if(currentPage != page){
 						$('#maxPageItem').val(limit);
 						$('#page').val(page);
- 						$('#sortName').val('last_name');
-						$('#sortBy').val('asc'); 
+ 						$('#sortName').val('event_id');
+						$('#sortBy').val('desc'); 
 						$('#type').val('list'); 
 						$('#formSubmit').submit();
 					}	

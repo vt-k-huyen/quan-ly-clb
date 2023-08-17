@@ -79,4 +79,9 @@ public class AnnouncementService implements IAnnouncementService{
 		return announcementDao.findAll();
 	}
 
+	@Override
+	public void deleteOne(long announcementID) {
+		announcementDao.delete(announcementID);
+	}
+
 }

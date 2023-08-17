@@ -17,6 +17,7 @@
 					<ul class="breadcrumb">
 						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">Trang
 								chủ</a></li>
+						<li class="active">Danh mục</li>
 						<li class="active">Danh sách thông báo</li>
 					</ul>
 					<!-- /.breadcrumb -->
@@ -24,29 +25,18 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-						
-							<div class="widget-box table-filter">
-									<div class="table-btn-controls">
-										<div class="pull-right tableTools-container">
-											<div class="dt-buttons btn-overlap btn-group">
-												<a flag="info"
-												   class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip"
-												   title='Thêm thông báo' href='<c:url value="/admin-announcement?type=edit"/>'>
-															<span>
-																<i class="fa fa-plus-circle bigger-110 purple"></i>
-															</span>
-												</a>
-												<button id="btnDelete" type="button"
-														class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" data-toggle="tooltip" title='Xóa thông báo'>
-																<span>
-																	<i class="fa fa-trash-o bigger-110 pink"></i>
-																</span>
-												</button>
-											</div>
-										</div>
+							<div class="table-btn-controls">
+								<div class="pull-right tableTools-container">
+									<div class="dt-buttons btn-overlap btn-group">
+										<a flag="info" class="btn btn-sm btn-primary btn-edit"
+											data-toggle="tooltip" title='Thêm thông báo'
+											href='<c:url value="/admin-announcement?type=edit"/>'> <span>
+												<i class="fa fa-plus-circle "></i>
+										</span>
+										</a>
 									</div>
 								</div>
-								
+							</div>
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="table-responsive">
@@ -78,6 +68,13 @@
 															</c:url>
 															<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
 																title="Cập nhật thông báo" href='${editURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+															</a>
+															<c:url var="deleteURL" value="/admin-announcement">
+																<c:param name="type" value="delete"></c:param>
+																<c:param name="announcementID" value="${item.announcementID}"></c:param>
+															</c:url>
+															<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
+																title="Xóa" href='${deleteURL}'><i class="fa fa-trash-o" aria-hidden="true"></i>
 															</a>
 														</td>
 													</tr>
@@ -124,29 +121,6 @@
 				}
 			});
 		});
-		$("btnDelete").click(function(){
-			var data = {};
-			var ids = $('tbody input[type=checkbox]:checked').map(function () {
-	            return $(this).val();
-			 }).get();
-			data['ids'] = ids;
-			deleteAnnouncement(data);
-		});
-		function deleteAnnouncement(data){
-			$.ajax({
-				url: '${apiURL}',
-				type: 'DELETE', 
-				contentType: 'application/json',
-				data: JSON.stringify(data),
-				dataType: 'json',
-				success: function(result){
-					  window.location.href = "$(AnnouncementURL)?type=list&maxPageItem=2&page=1";
-				},
-				error: function(error){
-					console.log(error);
-				}
-			});
-		}
 	</script>
 	
 </body>

@@ -14,4 +14,6 @@ public interface IRequestListService {
 	RequestListModel finish(RequestListModel finishRequest);
 	void deleteOne(long requestID);
 	int getTotalItem();
+	public List<RequestListModel> findClubs(String memberID,Pageble pageble);
+	int count(String memberID, Pageble pageble);
 }

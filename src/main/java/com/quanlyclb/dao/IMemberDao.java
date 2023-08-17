@@ -9,7 +9,7 @@ public interface IMemberDao extends GenericDao<MemberModel>{
 	List<MemberModel> findAll(Pageble pageble);
 	List<MemberModel> findAll();
 	MemberModel findOne(String memberID);
-	String save(MemberModel memberModel);
+	void save(MemberModel memberModel);
 	void update(MemberModel updateMember);
 	void delete(String memberID);
 	int getTotalItem();

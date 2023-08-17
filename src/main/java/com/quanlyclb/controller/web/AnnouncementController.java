@@ -1,4 +1,4 @@
- package com.quanlyclb.controller.admin;
+package com.quanlyclb.controller.web;
 
 import java.io.IOException;
 
@@ -19,15 +19,12 @@ import com.quanlyclb.service.IClubService;
 import com.quanlyclb.sort.Sorter;
 import com.quanlyclb.utils.FormUltil;
 
-@WebServlet(urlPatterns = {"/admin-announcement"})
+@WebServlet(urlPatterns = {"/announcement"})
 public class AnnouncementController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-
-	@Inject
-	private IAnnouncementService announcementService;
 	
 	@Inject
-	private IClubService clubService;
+	private IAnnouncementService announcementService;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		AnnouncementModel model = FormUltil.toModel(AnnouncementModel.class, request);
@@ -38,24 +35,18 @@ public class AnnouncementController extends HttpServlet{
 			model.setListResult(announcementService.findAll(pageble));
 			model.setTotalItem(announcementService.getTotalItem());
 			model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getMaxPageItem()));
-			view = "/views/admin/announcement/list.jsp"; 
-		} else if(model.getType().equals(SystemConstant.EDIT)){
+			view = "/views/web/announcement/list.jsp"; 
+		} if(model.getType().equals(SystemConstant.DETAIL)) {
 			if(model.getAnnouncementID() != null) {
 				model = announcementService.findOne(model.getAnnouncementID());
 			}
-			request.setAttribute("clubs", clubService.findAll());
-			view = "/views/admin/announcement/edit.jsp";	
-		} else if(model.getType().equals(SystemConstant.DELETE)){
-			if(model.getAnnouncementID() != null) {
-				announcementService.deleteOne(model.getAnnouncementID());
-			}
-			view = "/admin-announcement?type=list&page=1&maxPageItem=2&sortName=title&sortBy=asc";	
+			view = "/views/web/announcement/detail.jsp";	
 		}
 		request.setAttribute(SystemConstant.MODEL, model);
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		doGet(request, response);
 	}
 }

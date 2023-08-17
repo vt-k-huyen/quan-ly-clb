@@ -7,8 +7,8 @@ public class ClubModel extends AbstractModel<ClubModel>{
 	private String clubID;
 	private String clubName;
 	private String description;
-	private Date createDate;
-	private Date dissolutionDate;
+	private Timestamp createDate;
+	private Timestamp dissolutionDate;
 	public String getClubID() {
 		return clubID;
 	}
@@ -27,20 +27,20 @@ public class ClubModel extends AbstractModel<ClubModel>{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getCreateDate() {
+	public Timestamp getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
-	public Date getDissolutionDate() {
+	public Timestamp getDissolutionDate() {
 		return dissolutionDate;
 	}
-	public void setDissolutionDate(Date dissolutionDate) {
+	public void setDissolutionDate(Timestamp dissolutionDate) {
 		this.dissolutionDate = dissolutionDate;
 	}
-	public ClubModel(String clubID, String clubName, String description, Date createDate,
-			Date dissolutionDate) {
+	public ClubModel(String clubID, String clubName, String description, Timestamp createDate,
+			Timestamp dissolutionDate) {
 		super();
 		this.clubID = clubID;
 		this.clubName = clubName;
@@ -52,5 +52,6 @@ public class ClubModel extends AbstractModel<ClubModel>{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 }

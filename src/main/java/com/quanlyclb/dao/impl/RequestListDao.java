@@ -66,4 +66,17 @@ public class RequestListDao extends AbstractDao<RequestListModel> implements IRe
 		update(sql, finishRequest.getFinishTime(), finishRequest.getRequestID());
 	}
 
+	@Override
+	public List<RequestListModel> findClubs(String memberID, Pageble pageble) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM requests_list WHERE member_id LIKE ?");
+		if(pageble.getSorter() != null ) {
+			sql.append(" ORDER BY "+ pageble.getSorter().getSortName() +" " + pageble.getSorter().getSortBy() + "");
+		}	
+		if( pageble.getOffset() != null && pageble.getLimit() != null) {
+			sql.append(" LIMIT " + pageble.getOffset() + ", " + pageble.getLimit() +"");
+		} 
+		return query(sql.toString(), new RequestListMapper(),memberID);
+	}
+
+
 }

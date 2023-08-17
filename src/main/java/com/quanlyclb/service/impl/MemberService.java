@@ -31,7 +31,8 @@ public class MemberService implements IMemberService{
 
 	@Override
 	public MemberModel save(MemberModel memberModel) {
-		String member = memberDao.save(memberModel); 
+		memberDao.save(memberModel); 
+		String member = memberModel.getMemberID();
 		return memberDao.findOne(member);
 	}
 

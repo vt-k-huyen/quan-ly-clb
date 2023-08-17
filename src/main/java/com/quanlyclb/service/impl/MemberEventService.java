@@ -57,6 +57,19 @@ public class MemberEventService implements IMemberEventService{
 		return meDao.getTotalItem();
 	}
 
-	
+	@Override
+	public int count(String memberID, Pageble pageble) {
+		List<MemberEventModel> list = meDao.findEvents(memberID, pageble);
+		int t = 0;
+		for(MemberEventModel me : list) {
+			t++;
+		}
+		return t;
+	}
+
+	@Override
+	public List<MemberEventModel> findEvents(String memberID, Pageble pageble) {
+		return meDao.findEvents(memberID, pageble);
+	}
 
 }

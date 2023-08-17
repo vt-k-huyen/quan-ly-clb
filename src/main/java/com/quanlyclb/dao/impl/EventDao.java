@@ -61,5 +61,17 @@ public class EventDao extends AbstractDao<EventModel> implements IEventDao{
 		String sql  = "SELECT count(*) FROM events";
 		return count(sql);
 	}
-	
+
+	@Override
+	public List<EventModel> findEvents(String memberID, Pageble pageble) {
+		StringBuilder sql = new StringBuilder("select * from events where event_id not in (select events.event_id from  members_events inner join events on members_events.event_id = events.event_id where member_id LIKE ? AND status = 1) \r\n"
+				+ "and club_id in (SELECT clubs.club_id FROM clubs LEFT JOIN requests_list on clubs.club_id = requests_list.club_id WHERE member_id LIKE ? AND status = 1 )");
+		if(pageble.getSorter() != null ) {
+			sql.append(" ORDER BY "+ pageble.getSorter().getSortName() +" " + pageble.getSorter().getSortBy() + "");
+		}	
+		if( pageble.getOffset() != null && pageble.getLimit() != null) {
+			sql.append(" LIMIT " + pageble.getOffset() + ", " + pageble.getLimit() +"");
+		} 
+		return query(sql.toString(), new EventMapper(), memberID,memberID);
+	}
 }
